@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCitaAsignadaPorTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewCitaAsignadaPorLabel_codigo}"/>
+                    <h:outputText value="#{citaAsignadaPorController.selected.codigo}" title="#{bundle.ViewCitaAsignadaPorTitle_codigo}"/>
+                    <h:outputText value="#{bundle.ViewCitaAsignadaPorLabel_cita}"/>
+                    <h:outputText value="#{citaAsignadaPorController.selected.cita}" title="#{bundle.ViewCitaAsignadaPorTitle_cita}"/>
+                    <h:outputText value="#{bundle.ViewCitaAsignadaPorLabel_auxiliar}"/>
+                    <h:outputText value="#{citaAsignadaPorController.selected.auxiliar}" title="#{bundle.ViewCitaAsignadaPorTitle_auxiliar}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{citaAsignadaPorController.destroyAndView}" value="#{bundle.ViewCitaAsignadaPorDestroyLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="Edit" value="#{bundle.ViewCitaAsignadaPorEditLink}"/>
+                <br />
+                <h:commandLink action="#{citaAsignadaPorController.prepareCreate}" value="#{bundle.ViewCitaAsignadaPorCreateLink}" />
+                <br />
+                <h:commandLink action="#{citaAsignadaPorController.prepareList}" value="#{bundle.ViewCitaAsignadaPorShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ViewCitaAsignadaPorIndexLink}" action="/index" immediate="true" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

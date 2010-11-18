@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditUsuarioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_codigo}" for="codigo" />
+                    <h:inputText id="codigo" value="#{usuarioController.selected.codigo}" title="#{bundle.EditUsuarioTitle_codigo}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_codigo}"/>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_cedula}" for="cedula" />
+                    <h:inputText id="cedula" value="#{usuarioController.selected.cedula}" title="#{bundle.EditUsuarioTitle_cedula}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_cedula}"/>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="#{bundle.EditUsuarioTitle_nombre}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_nombre}"/>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_apellido}" for="apellido" />
+                    <h:inputText id="apellido" value="#{usuarioController.selected.apellido}" title="#{bundle.EditUsuarioTitle_apellido}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_apellido}"/>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_sexo}" for="sexo" />
+                    <h:inputText id="sexo" value="#{usuarioController.selected.sexo}" title="#{bundle.EditUsuarioTitle_sexo}" />
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_telefono}" for="telefono" />
+                    <h:inputText id="telefono" value="#{usuarioController.selected.telefono}" title="#{bundle.EditUsuarioTitle_telefono}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_telefono}"/>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_direccion}" for="direccion" />
+                    <h:inputText id="direccion" value="#{usuarioController.selected.direccion}" title="#{bundle.EditUsuarioTitle_direccion}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_direccion}"/>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_email}" for="email" />
+                    <h:inputText id="email" value="#{usuarioController.selected.email}" title="#{bundle.EditUsuarioTitle_email}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_email}"/>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_login}" for="login" />
+                    <h:inputText id="login" value="#{usuarioController.selected.login}" title="#{bundle.EditUsuarioTitle_login}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_login}"/>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_contrasena}" for="contrasena" />
+                    <h:inputText id="contrasena" value="#{usuarioController.selected.contrasena}" title="#{bundle.EditUsuarioTitle_contrasena}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_contrasena}"/>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_odontologo}" for="odontologo" />
+                    <h:selectOneMenu id="odontologo" value="#{usuarioController.selected.odontologo}" title="#{bundle.EditUsuarioTitle_odontologo}" >
+                        <f:selectItems value="#{odontologoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_auxiliar}" for="auxiliar" />
+                    <h:selectOneMenu id="auxiliar" value="#{usuarioController.selected.auxiliar}" title="#{bundle.EditUsuarioTitle_auxiliar}" >
+                        <f:selectItems value="#{auxiliarController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{usuarioController.update}" value="#{bundle.EditUsuarioSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditUsuarioViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{usuarioController.prepareList}" value="#{bundle.EditUsuarioShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditUsuarioIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

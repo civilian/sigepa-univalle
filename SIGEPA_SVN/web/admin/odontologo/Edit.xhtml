@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditOdontologoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditOdontologoLabel_cododontologo}" for="cododontologo" />
+                    <h:inputText id="cododontologo" value="#{odontologoController.selected.cododontologo}" title="#{bundle.EditOdontologoTitle_cododontologo}" required="true" requiredMessage="#{bundle.EditOdontologoRequiredMessage_cododontologo}"/>
+                    <h:outputLabel value="#{bundle.EditOdontologoLabel_titulo}" for="titulo" />
+                    <h:inputText id="titulo" value="#{odontologoController.selected.titulo}" title="#{bundle.EditOdontologoTitle_titulo}" required="true" requiredMessage="#{bundle.EditOdontologoRequiredMessage_titulo}"/>
+                    <h:outputLabel value="#{bundle.EditOdontologoLabel_especialidad}" for="especialidad" />
+                    <h:inputText id="especialidad" value="#{odontologoController.selected.especialidad}" title="#{bundle.EditOdontologoTitle_especialidad}" required="true" requiredMessage="#{bundle.EditOdontologoRequiredMessage_especialidad}"/>
+                    <h:outputLabel value="#{bundle.EditOdontologoLabel_usuario}" for="usuario" />
+                    <h:selectOneMenu id="usuario" value="#{odontologoController.selected.usuario}" title="#{bundle.EditOdontologoTitle_usuario}" required="true" requiredMessage="#{bundle.EditOdontologoRequiredMessage_usuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{odontologoController.update}" value="#{bundle.EditOdontologoSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditOdontologoViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{odontologoController.prepareList}" value="#{bundle.EditOdontologoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditOdontologoIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

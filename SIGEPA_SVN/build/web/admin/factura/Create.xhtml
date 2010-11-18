@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateFacturaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateFacturaLabel_codigo}" for="codigo" />
+                    <h:inputText id="codigo" value="#{facturaController.selected.codigo}" title="#{bundle.CreateFacturaTitle_codigo}" required="true" requiredMessage="#{bundle.CreateFacturaRequiredMessage_codigo}"/>
+                    <h:outputLabel value="#{bundle.CreateFacturaLabel_estado}" for="estado" />
+                    <h:inputText id="estado" value="#{facturaController.selected.estado}" title="#{bundle.CreateFacturaTitle_estado}" required="true" requiredMessage="#{bundle.CreateFacturaRequiredMessage_estado}"/>
+                    <h:outputLabel value="#{bundle.CreateFacturaLabel_total}" for="total" />
+                    <h:inputText id="total" value="#{facturaController.selected.total}" title="#{bundle.CreateFacturaTitle_total}" />
+                    <h:outputLabel value="#{bundle.CreateFacturaLabel_cita}" for="cita" />
+                    <h:selectOneMenu id="cita" value="#{facturaController.selected.cita}" title="#{bundle.CreateFacturaTitle_cita}" required="true" requiredMessage="#{bundle.CreateFacturaRequiredMessage_cita}">
+                        <f:selectItems value="#{citaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{facturaController.create}" value="#{bundle.CreateFacturaSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{facturaController.prepareList}" value="#{bundle.CreateFacturaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.CreateFacturaIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

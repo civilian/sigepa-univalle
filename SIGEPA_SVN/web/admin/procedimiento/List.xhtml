@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListProcedimientoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+        <h:form styleClass="jsfcrud_list_form">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:outputText escape="false" value="#{bundle.ListProcedimientoEmpty}" rendered="#{procedimientoController.items.rowCount == 0}"/>
+            <h:panelGroup rendered="#{procedimientoController.items.rowCount > 0}">
+                <h:outputText value="#{procedimientoController.pagination.pageFirstItem + 1}..#{procedimientoController.pagination.pageLastItem + 1}/#{procedimientoController.pagination.itemsCount}"/>&nbsp;
+                <h:commandLink action="#{procedimientoController.previous}" value="#{bundle.Previous} #{procedimientoController.pagination.pageSize}" rendered="#{procedimientoController.pagination.hasPreviousPage}"/>&nbsp;
+                <h:commandLink action="#{procedimientoController.next}" value="#{bundle.Next} #{procedimientoController.pagination.pageSize}" rendered="#{procedimientoController.pagination.hasNextPage}"/>&nbsp;
+                <h:dataTable value="#{procedimientoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProcedimientoTitle_codigo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.codigo}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProcedimientoTitle_nombre}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombre}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProcedimientoTitle_descripcion}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.descripcion}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProcedimientoTitle_TDuracion}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.TDuracion}">
+                            <f:convertDateTime pattern="HH:mm:ss" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProcedimientoTitle_costo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.costo}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="&nbsp;"/>
+                        </f:facet>
+                        <h:commandLink action="#{procedimientoController.prepareView}" value="#{bundle.ListProcedimientoViewLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{procedimientoController.prepareEdit}" value="#{bundle.ListProcedimientoEditLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{procedimientoController.destroy}" value="#{bundle.ListProcedimientoDestroyLink}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
+            <br />
+            <h:commandLink action="#{procedimientoController.prepareCreate}" value="#{bundle.ListProcedimientoCreateLink}"/>
+            <br />
+            <br />
+            <h:commandLink value="#{bundle.ListProcedimientoIndexLink}" action="/index" immediate="true" />
+        </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

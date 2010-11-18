@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewHistoriaClinicaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewHistoriaClinicaLabel_codigo}"/>
+                    <h:outputText value="#{historiaClinicaController.selected.codigo}" title="#{bundle.ViewHistoriaClinicaTitle_codigo}"/>
+                    <h:outputText value="#{bundle.ViewHistoriaClinicaLabel_fecha}"/>
+                    <h:outputText value="#{historiaClinicaController.selected.fecha}" title="#{bundle.ViewHistoriaClinicaTitle_fecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewHistoriaClinicaLabel_paciente}"/>
+                    <h:outputText value="#{historiaClinicaController.selected.paciente}" title="#{bundle.ViewHistoriaClinicaTitle_paciente}"/>
+                    <h:outputText value="#{bundle.ViewHistoriaClinicaLabel_cita}"/>
+                    <h:outputText value="#{historiaClinicaController.selected.cita}" title="#{bundle.ViewHistoriaClinicaTitle_cita}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{historiaClinicaController.destroyAndView}" value="#{bundle.ViewHistoriaClinicaDestroyLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="Edit" value="#{bundle.ViewHistoriaClinicaEditLink}"/>
+                <br />
+                <h:commandLink action="#{historiaClinicaController.prepareCreate}" value="#{bundle.ViewHistoriaClinicaCreateLink}" />
+                <br />
+                <h:commandLink action="#{historiaClinicaController.prepareList}" value="#{bundle.ViewHistoriaClinicaShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ViewHistoriaClinicaIndexLink}" action="/index" immediate="true" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

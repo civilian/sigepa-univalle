@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditCitaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditCitaLabel_codigo}" for="codigo" />
+                    <h:inputText id="codigo" value="#{citaController.selected.codigo}" title="#{bundle.EditCitaTitle_codigo}" required="true" requiredMessage="#{bundle.EditCitaRequiredMessage_codigo}"/>
+                    <h:outputLabel value="#{bundle.EditCitaLabel_fechaHora}" for="fechaHora" />
+                    <h:inputText id="fechaHora" value="#{citaController.selected.fechaHora}" title="#{bundle.EditCitaTitle_fechaHora}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditCitaLabel_estado}" for="estado" />
+                    <h:inputText id="estado" value="#{citaController.selected.estado}" title="#{bundle.EditCitaTitle_estado}" />
+                    <h:outputLabel value="#{bundle.EditCitaLabel_paciente}" for="paciente" />
+                    <h:selectOneMenu id="paciente" value="#{citaController.selected.paciente}" title="#{bundle.EditCitaTitle_paciente}" >
+                        <f:selectItems value="#{pacienteController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditCitaLabel_odontologo}" for="odontologo" />
+                    <h:selectOneMenu id="odontologo" value="#{citaController.selected.odontologo}" title="#{bundle.EditCitaTitle_odontologo}" >
+                        <f:selectItems value="#{odontologoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{citaController.update}" value="#{bundle.EditCitaSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditCitaViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{citaController.prepareList}" value="#{bundle.EditCitaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditCitaIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

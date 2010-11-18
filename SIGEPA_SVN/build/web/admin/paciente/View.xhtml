@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPacienteTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewPacienteLabel_codpaciente}"/>
+                    <h:outputText value="#{pacienteController.selected.codpaciente}" title="#{bundle.ViewPacienteTitle_codpaciente}"/>
+                    <h:outputText value="#{bundle.ViewPacienteLabel_cedula}"/>
+                    <h:outputText value="#{pacienteController.selected.cedula}" title="#{bundle.ViewPacienteTitle_cedula}"/>
+                    <h:outputText value="#{bundle.ViewPacienteLabel_nombre}"/>
+                    <h:outputText value="#{pacienteController.selected.nombre}" title="#{bundle.ViewPacienteTitle_nombre}"/>
+                    <h:outputText value="#{bundle.ViewPacienteLabel_apellido}"/>
+                    <h:outputText value="#{pacienteController.selected.apellido}" title="#{bundle.ViewPacienteTitle_apellido}"/>
+                    <h:outputText value="#{bundle.ViewPacienteLabel_sexo}"/>
+                    <h:outputText value="#{pacienteController.selected.sexo}" title="#{bundle.ViewPacienteTitle_sexo}"/>
+                    <h:outputText value="#{bundle.ViewPacienteLabel_telefono}"/>
+                    <h:outputText value="#{pacienteController.selected.telefono}" title="#{bundle.ViewPacienteTitle_telefono}"/>
+                    <h:outputText value="#{bundle.ViewPacienteLabel_direccion}"/>
+                    <h:outputText value="#{pacienteController.selected.direccion}" title="#{bundle.ViewPacienteTitle_direccion}"/>
+                    <h:outputText value="#{bundle.ViewPacienteLabel_email}"/>
+                    <h:outputText value="#{pacienteController.selected.email}" title="#{bundle.ViewPacienteTitle_email}"/>
+                    <h:outputText value="#{bundle.ViewPacienteLabel_fechanacimiento}"/>
+                    <h:outputText value="#{pacienteController.selected.fechanacimiento}" title="#{bundle.ViewPacienteTitle_fechanacimiento}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewPacienteLabel_rh}"/>
+                    <h:outputText value="#{pacienteController.selected.rh}" title="#{bundle.ViewPacienteTitle_rh}"/>
+                    <h:outputText value="#{bundle.ViewPacienteLabel_antecedentesMedicos}"/>
+                    <h:outputText value="#{pacienteController.selected.antecedentesMedicos}" title="#{bundle.ViewPacienteTitle_antecedentesMedicos}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{pacienteController.destroyAndView}" value="#{bundle.ViewPacienteDestroyLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="Edit" value="#{bundle.ViewPacienteEditLink}"/>
+                <br />
+                <h:commandLink action="#{pacienteController.prepareCreate}" value="#{bundle.ViewPacienteCreateLink}" />
+                <br />
+                <h:commandLink action="#{pacienteController.prepareList}" value="#{bundle.ViewPacienteShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ViewPacienteIndexLink}" action="/index" immediate="true" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
