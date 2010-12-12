@@ -14,9 +14,7 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateUsuarioLabel_codigo}" for="codigo" />
-                    <h:inputText id="codigo" value="#{usuarioController.selected.codigo}" title="#{bundle.CreateUsuarioTitle_codigo}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_codigo}"/>
+                <h:panelGrid columns="2">                    
                     <h:outputLabel value="#{bundle.CreateUsuarioLabel_cedula}" for="cedula" />
                     <h:inputText id="cedula" value="#{usuarioController.selected.cedula}" title="#{bundle.CreateUsuarioTitle_cedula}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_cedula}"/>
                     <h:outputLabel value="#{bundle.CreateUsuarioLabel_nombre}" for="nombre" />
@@ -35,14 +33,14 @@
                     <h:inputText id="login" value="#{usuarioController.selected.login}" title="#{bundle.CreateUsuarioTitle_login}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_login}"/>
                     <h:outputLabel value="#{bundle.CreateUsuarioLabel_contrasena}" for="contrasena" />
                     <h:inputText id="contrasena" value="#{usuarioController.selected.contrasena}" title="#{bundle.CreateUsuarioTitle_contrasena}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_contrasena}"/>
-                    <h:outputLabel value="#{bundle.CreateUsuarioLabel_odontologo}" for="odontologo" />
-                    <h:selectOneMenu id="odontologo" value="#{usuarioController.selected.odontologo}" title="#{bundle.CreateUsuarioTitle_odontologo}" >
+<!--                    <h:outputLabel value="#{bundle.CreateUsuarioLabel_odontologo}" for="odontologo" />-->
+<!--                    <h:selectOneMenu id="odontologo" value="#{usuarioController.selected.odontologo}" title="#{bundle.CreateUsuarioTitle_odontologo}" >
                         <f:selectItems value="#{odontologoController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateUsuarioLabel_auxiliar}" for="auxiliar" />
                     <h:selectOneMenu id="auxiliar" value="#{usuarioController.selected.auxiliar}" title="#{bundle.CreateUsuarioTitle_auxiliar}" >
                         <f:selectItems value="#{auxiliarController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
+                    </h:selectOneMenu>-->
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{usuarioController.create}" value="#{bundle.CreateUsuarioSaveLink}" />
