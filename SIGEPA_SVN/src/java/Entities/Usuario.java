@@ -211,7 +211,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Usuario[codigo=" + codigo + "]";
+        return cedula + "-" + nombre;
     }
 
 }
