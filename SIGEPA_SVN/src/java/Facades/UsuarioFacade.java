@@ -6,6 +6,9 @@
 package Facades;
 
 import Entities.Usuario;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Vector;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,5 +29,6 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     public UsuarioFacade() {
         super(Usuario.class);
     }
+
 
 }
