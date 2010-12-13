@@ -108,6 +108,7 @@ public class UsuarioController {
            else
            {
                 entity_auxiliar.setCodauxiliar(id_last);
+                entity_auxiliar.setUsuario(current);
                 facade_auxiliar.create(entity_auxiliar);
            }
 

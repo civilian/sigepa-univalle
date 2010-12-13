@@ -6,9 +6,36 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><ui:insert name="title">Default Title</ui:insert></title>
-<h:outputStylesheet name="css/jsfcrud.css"/>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <h:outputScript library="js" name="jquery.js" />
+
+        <!--        <script type="text/javascript" src="js/jquery.js"></script>-->
+        <script type="text/javascript">
+          jQuery(document).ready(function() {
+//            alert('hola');
+
+            if($("#form_nuevo_usuario\\:sel_rol option:selected").val()=="Odontologo"){
+//                 alert($("#form_nuevo_usuario\\:sel_rol option:selected").val());
+                 $("#form_nuevo_usuario\\:panel_odontologo").removeAttr("style");
+             }else{
+//                 alert($("#form_nuevo_usuario\\:sel_rol option:selected").val());
+                 $("#form_nuevo_usuario\\:panel_odontologo").attr("style", "display:none");
+             }
+         });
+
+         function cambiar_rol_nuevo_usuario(){
+//             alert('hello');
+             if($("#form_nuevo_usuario\\:sel_rol option:selected").val()=="Odontologo"){
+//                 alert($("#form_nuevo_usuario\\:sel_rol option:selected").val());
+                 $("#form_nuevo_usuario\\:panel_odontologo").removeAttr("style");                 
+             }else{
+//                 alert($("#form_nuevo_usuario\\:sel_rol option:selected").val());
+                 $("#form_nuevo_usuario\\:panel_odontologo").attr("style", "display:none");
+             }
+         }
+        </script>
     </h:head>
-    
+
     <h:body>
         <h1>
             <ui:insert name="title">Default Title</ui:insert>
@@ -18,6 +45,6 @@
         </p>
     </h:body>
 
-<!--    hola jorge marica-->
-    
+    <!--    hola jorge marica-->
+
 </html>
