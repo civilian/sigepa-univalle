@@ -13,10 +13,8 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditUsuarioLabel_codigo}" for="codigo" />
-                    <h:inputText id="codigo" value="#{usuarioController.selected.codigo}" title="#{bundle.EditUsuarioTitle_codigo}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_codigo}"/>
+            <h:form id="form_nuevo_usuario">
+                <h:panelGrid columns="2">                   
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_cedula}" for="cedula" />
                     <h:inputText id="cedula" value="#{usuarioController.selected.cedula}" title="#{bundle.EditUsuarioTitle_cedula}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_cedula}"/>
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_nombre}" for="nombre" />
@@ -35,15 +33,22 @@
                     <h:inputText id="login" value="#{usuarioController.selected.login}" title="#{bundle.EditUsuarioTitle_login}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_login}"/>
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_contrasena}" for="contrasena" />
                     <h:inputText id="contrasena" value="#{usuarioController.selected.contrasena}" title="#{bundle.EditUsuarioTitle_contrasena}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_contrasena}"/>
-                    <h:outputLabel value="#{bundle.EditUsuarioLabel_odontologo}" for="odontologo" />
-                    <h:selectOneMenu id="odontologo" value="#{usuarioController.selected.odontologo}" title="#{bundle.EditUsuarioTitle_odontologo}" >
-                        <f:selectItems value="#{odontologoController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditUsuarioLabel_auxiliar}" for="auxiliar" />
-                    <h:selectOneMenu id="auxiliar" value="#{usuarioController.selected.auxiliar}" title="#{bundle.EditUsuarioTitle_auxiliar}" >
-                        <f:selectItems value="#{auxiliarController.itemsAvailableSelectOne}"/>
+                </h:panelGrid>
+
+                <h:panelGrid columns="2" id="panel_rol">
+                    <h:outputLabel value="Tipo de Usuario" for="sel_rol" />
+                    <h:selectOneMenu id="sel_rol" value="#{usuarioController.sel_rol}" onchange="cambiar_rol_nuevo_usuario()" >
+                        <f:selectItems value="#{usuarioController.rol}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
+
+                <h:panelGrid columns="2" id="panel_odontologo">
+                    <h:outputLabel value="#{bundle.CreateOdontologoLabel_titulo}" for="titulo" />
+                    <h:inputText id="odontologo_titulo" value="#{usuarioController.titulo}" title="#{bundle.CreateOdontologoTitle_titulo}" required="true" requiredMessage="#{bundle.CreateOdontologoRequiredMessage_titulo}"/>
+                    <h:outputLabel value="#{bundle.CreateOdontologoLabel_especialidad}" for="especialidad" />
+                    <h:inputText id="odontologo_especialidad" value="#{usuarioController.especialidad}" title="#{bundle.CreateOdontologoTitle_especialidad}" required="true" requiredMessage="#{bundle.CreateOdontologoRequiredMessage_especialidad}"/>
+                </h:panelGrid>
+
                 <h:commandLink action="#{usuarioController.update}" value="#{bundle.EditUsuarioSaveLink}"/>
                 <br />
                 <br />
@@ -56,5 +61,4 @@
             </h:form>
         </ui:define>
     </ui:composition>
-
 </html>

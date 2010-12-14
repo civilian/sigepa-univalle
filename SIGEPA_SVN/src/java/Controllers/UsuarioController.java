@@ -25,20 +25,20 @@ public class UsuarioController {
 
     private Usuario current;
     private Odontologo entity_odontologo = new Odontologo();
+    private Auxiliar entity_auxiliar = new Auxiliar();
     private DataModel items = null;
     @EJB
     private Facades.UsuarioFacade ejbFacade;
     @EJB
     private Facades.OdontologoFacade facade_odontologo;
+    @EJB
+    private Facades.AuxiliarFacade facade_auxiliar;
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private String titulo;
     private String especialidad;
-    private Auxiliar entity_auxiliar = new Auxiliar();
     private String[] rol = {"Auxiliar", "Odontologo"};
     private String sel_rol = "Odontologo";
-    @EJB
-    private Facades.AuxiliarFacade facade_auxiliar;
 
     public UsuarioController() {
     }
@@ -91,11 +91,8 @@ public class UsuarioController {
 
     public String prepareCreate() {
         current = new Usuario();
-        entity_odontologo = new Odontologo();
-        entity_auxiliar = new Auxiliar();
-        titulo = "";
-        especialidad = "";
-        
+        resetValores();
+
         selectedItemIndex = -1;
         return "Create";
     }
@@ -127,13 +124,61 @@ public class UsuarioController {
 
     public String prepareEdit() {
         current = (Usuario) getItems().getRowData();
+        resetValores();
+
+        if (current.getOdontologo() != null) {
+            entity_odontologo = facade_odontologo.find(current.getCodigo());
+            titulo = entity_odontologo.getTitulo();
+            especialidad = entity_odontologo.getEspecialidad();
+            sel_rol="Odontologo";
+        }
+        if (current.getAuxiliar() != null) {
+            entity_auxiliar = facade_auxiliar.find(current.getCodigo());
+            sel_rol="Auxiliar";
+        }
+
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
+    public void resetValores() {
+        entity_odontologo = new Odontologo();
+        entity_auxiliar = new Auxiliar();
+        titulo = "";
+        especialidad = "";
+    }
+
     public String update() {
         try {
+
+            if (entity_auxiliar != null) {
+                facade_auxiliar.remove(entity_auxiliar);
+            }
+            if (entity_odontologo != null) {
+                facade_odontologo.remove(entity_odontologo);
+            }            
+
+            int id_last = current.getCodigo();
+            if (sel_rol.equals("Odontologo")) {
+                
+                entity_odontologo.setCododontologo(id_last);
+                entity_odontologo.setTitulo(titulo);
+                entity_odontologo.setEspecialidad(especialidad);
+                entity_odontologo.setUsuario(current);
+                facade_odontologo.create(entity_odontologo);
+                current.setAuxiliar(null);
+                current.setOdontologo(entity_odontologo);
+            } else {                
+                entity_auxiliar.setCodauxiliar(id_last);
+                entity_auxiliar.setUsuario(current);
+                facade_auxiliar.create(entity_auxiliar);
+                current.setOdontologo(null);
+                current.setAuxiliar(entity_auxiliar);
+                titulo = "";
+                especialidad = "";
+            }
             getFacade().edit(current);
+
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
             return "View";
         } catch (Exception e) {

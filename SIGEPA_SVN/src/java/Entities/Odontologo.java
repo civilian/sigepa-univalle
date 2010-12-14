@@ -122,7 +122,7 @@ public class Odontologo implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Odontologo[cododontologo=" + cododontologo + "]";
+        return cododontologo+"-"+usuario.getNombre();
     }
 
 }
