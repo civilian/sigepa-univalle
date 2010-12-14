@@ -130,11 +130,11 @@ public class UsuarioController {
             entity_odontologo = facade_odontologo.find(current.getCodigo());
             titulo = entity_odontologo.getTitulo();
             especialidad = entity_odontologo.getEspecialidad();
-            sel_rol="Odontologo";
+            sel_rol = "Odontologo";
         }
         if (current.getAuxiliar() != null) {
             entity_auxiliar = facade_auxiliar.find(current.getCodigo());
-            sel_rol="Auxiliar";
+            sel_rol = "Auxiliar";
         }
 
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
@@ -156,11 +156,11 @@ public class UsuarioController {
             }
             if (entity_odontologo != null) {
                 facade_odontologo.remove(entity_odontologo);
-            }            
+            }
 
             int id_last = current.getCodigo();
             if (sel_rol.equals("Odontologo")) {
-                
+
                 entity_odontologo.setCododontologo(id_last);
                 entity_odontologo.setTitulo(titulo);
                 entity_odontologo.setEspecialidad(especialidad);
@@ -168,7 +168,7 @@ public class UsuarioController {
                 facade_odontologo.create(entity_odontologo);
                 current.setAuxiliar(null);
                 current.setOdontologo(entity_odontologo);
-            } else {                
+            } else {
                 entity_auxiliar.setCodauxiliar(id_last);
                 entity_auxiliar.setUsuario(current);
                 facade_auxiliar.create(entity_auxiliar);
@@ -190,6 +190,19 @@ public class UsuarioController {
     public String destroy() {
         current = (Usuario) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+
+        resetValores();
+
+        if (current.getOdontologo() != null) {
+            entity_odontologo = facade_odontologo.find(current.getCodigo());
+            titulo = entity_odontologo.getTitulo();
+            especialidad = entity_odontologo.getEspecialidad();
+            sel_rol = "Odontologo";
+        }
+        if (current.getAuxiliar() != null) {
+            entity_auxiliar = facade_auxiliar.find(current.getCodigo());
+            sel_rol = "Auxiliar";
+        }
         performDestroy();
         recreateModel();
         return "List";
@@ -210,6 +223,12 @@ public class UsuarioController {
 
     private void performDestroy() {
         try {
+            if (current.getOdontologo() != null) {
+                facade_odontologo.remove(entity_odontologo);
+            }
+            if (current.getAuxiliar() != null) {
+                facade_auxiliar.remove(entity_auxiliar);
+            }
             getFacade().remove(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuarioDeleted"));
         } catch (Exception e) {
