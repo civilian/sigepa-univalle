@@ -35,10 +35,15 @@
                     <h:outputText value="#{usuarioController.selected.login}" title="#{bundle.ViewUsuarioTitle_login}"/>
                     <h:outputText value="#{bundle.ViewUsuarioLabel_contrasena}"/>
                     <h:outputText value="#{usuarioController.selected.contrasena}" title="#{bundle.ViewUsuarioTitle_contrasena}"/>
-                    <h:outputText value="#{bundle.ViewUsuarioLabel_odontologo}"/>
-                    <h:outputText value="#{usuarioController.selected.odontologo}" title="#{bundle.ViewUsuarioTitle_odontologo}"/>
-                    <h:outputText value="#{bundle.ViewUsuarioLabel_auxiliar}"/>
-                    <h:outputText value="#{usuarioController.selected.auxiliar}" title="#{bundle.ViewUsuarioTitle_auxiliar}"/>
+                    <h:outputText value="Es Auxiliar" rendered="#{usuarioController.selected.odontologo == null}"/>
+                    <h:outputText value="Es Odontologo" rendered="#{usuarioController.selected.auxiliar == null}"/> 
+                </h:panelGrid>
+
+                <h:panelGrid columns="2" rendered="#{usuarioController.selected.odontologo != null}">
+                    <h:outputText value="#{bundle.ViewOdontologoLabel_titulo}" />
+                    <h:outputText value="#{usuarioController.titulo}" />
+                    <h:outputText value="#{bundle.ViewOdontologoLabel_especialidad}" />
+                    <h:outputText value="#{usuarioController.especialidad}" />
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{usuarioController.destroyAndView}" value="#{bundle.ViewUsuarioDestroyLink}"/>

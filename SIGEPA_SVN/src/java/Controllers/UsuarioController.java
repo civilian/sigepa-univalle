@@ -34,8 +34,8 @@ public class UsuarioController {
     private int selectedItemIndex;
     private String titulo;
     private String especialidad;
-    private Auxiliar entity_auxiliar=new Auxiliar();
-    private String[] rol={"Auxiliar", "Odontologo"};
+    private Auxiliar entity_auxiliar = new Auxiliar();
+    private String[] rol = {"Auxiliar", "Odontologo"};
     private String sel_rol = "Odontologo";
     @EJB
     private Facades.AuxiliarFacade facade_auxiliar;
@@ -80,40 +80,42 @@ public class UsuarioController {
 
     public String prepareView() {
         current = (Usuario) getItems().getRowData();
+        if (current.getOdontologo() != null) {
+            titulo = facade_odontologo.find(current.getCodigo()).getTitulo();
+            especialidad = facade_odontologo.find(current.getCodigo()).getEspecialidad();
+        }
+
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
         current = new Usuario();
+        entity_odontologo = new Odontologo();
+        entity_auxiliar = new Auxiliar();
+        titulo = "";
+        especialidad = "";
+        
         selectedItemIndex = -1;
         return "Create";
     }
 
     public String create() {
-
-
-
         try {
             getFacade().create(current);
 
-           int id_last=current.getCodigo();
-           if(sel_rol.equals("Odontologo"))
-           {
+            int id_last = current.getCodigo();
+            if (sel_rol.equals("Odontologo")) {
                 entity_odontologo.setCododontologo(id_last);
                 entity_odontologo.setTitulo(titulo);
                 entity_odontologo.setEspecialidad(especialidad);
                 entity_odontologo.setUsuario(current);
                 facade_odontologo.create(entity_odontologo);
-            }
-           else
-           {
+            } else {
                 entity_auxiliar.setCodauxiliar(id_last);
                 entity_auxiliar.setUsuario(current);
                 facade_auxiliar.create(entity_auxiliar);
-           }
-
-            
+            }
 
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuarioCreated"));
             return prepareCreate();
@@ -284,5 +286,4 @@ public class UsuarioController {
     public void setSel_rol(String sel_rol) {
         this.sel_rol = sel_rol;
     }
-
 }
