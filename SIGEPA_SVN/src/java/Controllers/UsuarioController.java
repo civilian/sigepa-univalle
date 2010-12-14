@@ -37,6 +37,7 @@ public class UsuarioController {
     private Auxiliar entity_auxiliar=new Auxiliar();
     private String[] rol={"Auxiliar", "Odontologo"};
     private String sel_rol = "Odontologo";
+    @EJB
     private Facades.AuxiliarFacade facade_auxiliar;
 
     public UsuarioController() {

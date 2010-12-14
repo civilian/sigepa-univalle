@@ -14,23 +14,21 @@
           jQuery(document).ready(function() {
 //            alert('hola');
 
-            if($("#form_nuevo_usuario\\:sel_rol option:selected").val()=="Odontologo"){
-//                 alert($("#form_nuevo_usuario\\:sel_rol option:selected").val());
-                 $("#form_nuevo_usuario\\:panel_odontologo").removeAttr("style");
-             }else{
-//                 alert($("#form_nuevo_usuario\\:sel_rol option:selected").val());
-                 $("#form_nuevo_usuario\\:panel_odontologo").attr("style", "display:none");
-             }
+cambiar_rol_nuevo_usuario();
          });
 
          function cambiar_rol_nuevo_usuario(){
 //             alert('hello');
              if($("#form_nuevo_usuario\\:sel_rol option:selected").val()=="Odontologo"){
 //                 alert($("#form_nuevo_usuario\\:sel_rol option:selected").val());
-                 $("#form_nuevo_usuario\\:panel_odontologo").removeAttr("style");                 
+                 $("#form_nuevo_usuario\\:panel_odontologo").removeAttr("style");
+                 $("#form_nuevo_usuario\\:odontologo_titulo").removeAttr("disabled");
+                 $("#form_nuevo_usuario\\:odontologo_especialidad").removeAttr("disabled");
              }else{
 //                 alert($("#form_nuevo_usuario\\:sel_rol option:selected").val());
                  $("#form_nuevo_usuario\\:panel_odontologo").attr("style", "display:none");
+                 $("#form_nuevo_usuario\\:odontologo_titulo").attr("disabled", "true");
+                 $("#form_nuevo_usuario\\:odontologo_especialidad").attr("disabled", "true");
              }
          }
         </script>
