@@ -226,7 +226,9 @@ public class Paciente implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Paciente[codpaciente=" + codpaciente + "]";
+        return cedula+" - "+nombre+" "+apellido;
+
+
     }
 
 }

@@ -92,7 +92,7 @@ public class Auxiliar implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Auxiliar[codauxiliar=" + codauxiliar + "]";
+        return usuario.getCedula()+" - "+usuario.getNombre()+" "+usuario.getApellido();
     }
 
 }

@@ -15,8 +15,7 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewCitaLabel_codigo}"/>
-                    <h:outputText value="#{citaController.selected.codigo}" title="#{bundle.ViewCitaTitle_codigo}"/>
+                   
                     <h:outputText value="#{bundle.ViewCitaLabel_fechaHora}"/>
                     <h:outputText value="#{citaController.selected.fechaHora}" title="#{bundle.ViewCitaTitle_fechaHora}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -27,6 +26,8 @@
                     <h:outputText value="#{citaController.selected.paciente}" title="#{bundle.ViewCitaTitle_paciente}"/>
                     <h:outputText value="#{bundle.ViewCitaLabel_odontologo}"/>
                     <h:outputText value="#{citaController.selected.odontologo}" title="#{bundle.ViewCitaTitle_odontologo}"/>
+                    <h:outputText value="#{bundle.ViewCitaAsignadaPorLabel_auxiliar}"/>
+                    <h:outputText value="#{citaController.selected.}" title="#{bundle.ViewCitaAsignadaPorTitle_auxiliar}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{citaController.destroyAndView}" value="#{bundle.ViewCitaDestroyLink}"/>

@@ -3,6 +3,9 @@ package Controllers;
 import Entities.Cita;
 import Controllers.util.JsfUtil;
 import Controllers.util.PaginationHelper;
+import Entities.Auxiliar;
+import Entities.CitaAsignadaPor;
+import Entities.CitaProcedimiento;
 import Facades.CitaFacade;
 
 import java.util.ResourceBundle;
@@ -24,11 +27,57 @@ public class CitaController {
     private Cita current;
     private DataModel items = null;
     @EJB private Facades.CitaFacade ejbFacade;
+    @EJB private Facades.CitaAsignadaPorFacade facade_citaAsignadaPor;
+    @EJB private Facades.CitaProcedimientoFacade facade_citaProcedimiento;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private CitaAsignadaPor entity_cita_asignada_por=new CitaAsignadaPor();
+    private CitaProcedimiento entity_citaProcedimiento=new CitaProcedimiento();
+    //private String observaciones;
+
+    ///talvez se pueda borrar
+    //private Auxiliar auxiliar;
 
     public CitaController() {
+
+
     }
+
+    public CitaProcedimiento getEntity_citaProcedimiento() {
+        return entity_citaProcedimiento;
+    }
+
+    public void setEntity_citaProcedimiento(CitaProcedimiento entity_citaProcedimiento) {
+        this.entity_citaProcedimiento = entity_citaProcedimiento;
+    }
+
+    
+
+    public CitaAsignadaPor getEntity_cita_asignada_por() {
+        return entity_cita_asignada_por;
+    }
+
+    public void setEntity_cita_asignada_por(CitaAsignadaPor entity_cita_asignada_por) {
+        this.entity_cita_asignada_por = entity_cita_asignada_por;
+    }
+/*
+    public Auxiliar getAuxiliar() {
+        return auxiliar;
+    }
+
+    public void setAuxiliar(Auxiliar auxiliar) {
+        this.auxiliar = auxiliar;
+    }*/
+
+   /* public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }*/
+
+    
 
     public Cita getSelected() {
         if (current == null) {
@@ -79,7 +128,18 @@ public class CitaController {
 
     public String create() {
         try {
+
             getFacade().create(current);
+                      
+            //entity_cita_asignada_por.setAuxiliar(auxiliar);
+            entity_cita_asignada_por.setCita(current);
+            facade_citaAsignadaPor.create(entity_cita_asignada_por);
+
+            //entity_citaProcedimiento.setObservaciones(observaciones);
+            //entity_citaProcedimiento.set
+            entity_citaProcedimiento.setCita(current);
+            facade_citaProcedimiento.create(entity_citaProcedimiento);
+
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CitaCreated"));
             return prepareCreate();
         } catch (Exception e) {

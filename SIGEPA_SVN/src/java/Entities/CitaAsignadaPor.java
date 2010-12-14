@@ -27,6 +27,8 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "CitaAsignadaPor.findAll", query = "SELECT c FROM CitaAsignadaPor c"),
     @NamedQuery(name = "CitaAsignadaPor.findByCodigo", query = "SELECT c FROM CitaAsignadaPor c WHERE c.codigo = :codigo")})
+    //@NamedQuery(name = "CitaAsignadaPor.findByCodigo", query = "SELECT c FROM CitaAsignadaPor c WHERE c.codigo = :codigo")})
+
 public class CitaAsignadaPor implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

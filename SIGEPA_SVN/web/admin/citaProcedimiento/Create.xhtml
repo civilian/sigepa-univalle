@@ -15,10 +15,8 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateCitaProcedimientoLabel_codigo}" for="codigo" />
-                    <h:inputText id="codigo" value="#{citaProcedimientoController.selected.codigo}" title="#{bundle.CreateCitaProcedimientoTitle_codigo}" required="true" requiredMessage="#{bundle.CreateCitaProcedimientoRequiredMessage_codigo}"/>
                     <h:outputLabel value="#{bundle.CreateCitaProcedimientoLabel_observaciones}" for="observaciones" />
-                    <h:inputText id="observaciones" value="#{citaProcedimientoController.selected.observaciones}" title="#{bundle.CreateCitaProcedimientoTitle_observaciones}" required="true" requiredMessage="#{bundle.CreateCitaProcedimientoRequiredMessage_observaciones}"/>
+                    <h:inputTextarea id="observaciones" value="#{citaProcedimientoController.selected.observaciones}" title="#{bundle.CreateCitaProcedimientoTitle_observaciones}" required="true" requiredMessage="#{bundle.CreateCitaProcedimientoRequiredMessage_observaciones}"/>
                     <h:outputLabel value="#{bundle.CreateCitaProcedimientoLabel_procedimiento}" for="procedimiento" />
                     <h:selectOneMenu id="procedimiento" value="#{citaProcedimientoController.selected.procedimiento}" title="#{bundle.CreateCitaProcedimientoTitle_procedimiento}" >
                         <f:selectItems value="#{procedimientoController.itemsAvailableSelectOne}"/>

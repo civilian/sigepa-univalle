@@ -14,9 +14,7 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateCitaLabel_codigo}" for="codigo" />
-                    <h:inputText id="codigo" value="#{citaController.selected.codigo}" title="#{bundle.CreateCitaTitle_codigo}" required="true" requiredMessage="#{bundle.CreateCitaRequiredMessage_codigo}"/>
+                <h:panelGrid columns="2">                   
                     <h:outputLabel value="#{bundle.CreateCitaLabel_fechaHora}" for="fechaHora" />
                     <h:inputText id="fechaHora" value="#{citaController.selected.fechaHora}" title="#{bundle.CreateCitaTitle_fechaHora}" >
                         <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -31,6 +29,20 @@
                     <h:selectOneMenu id="odontologo" value="#{citaController.selected.odontologo}" title="#{bundle.CreateCitaTitle_odontologo}" >
                         <f:selectItems value="#{odontologoController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateCitaProcedimientoLabel_procedimiento}" for="procedimiento" />
+                    <h:selectOneMenu id="procedimiento" value="#{citaController.entity_citaProcedimiento.procedimiento}" title="#{bundle.CreateCitaProcedimientoTitle_procedimiento}" >
+                        <f:selectItems value="#{procedimientoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                     <h:outputLabel value="#{bundle.CreateCitaAsignadaPorLabel_auxiliar}" for="auxiliar" />
+                     <h:selectOneMenu id="auxiliar" value="#{citaController.entity_cita_asignada_por.auxiliar}" title="#{bundle.CreateCitaAsignadaPorTitle_auxiliar}" >
+                         <f:selectItems value="#{auxiliarController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+
+                     <h:outputLabel value="#{bundle.CreateCitaProcedimientoLabel_observaciones}" for="observaciones" />
+                     <h:inputTextarea id="observaciones" value="#{citaController.entity_citaProcedimiento.observaciones}" title="#{bundle.CreateCitaProcedimientoTitle_observaciones}" required="true" requiredMessage="#{bundle.CreateCitaProcedimientoRequiredMessage_observaciones}"/>
+
+                    
+
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{citaController.create}" value="#{bundle.CreateCitaSaveLink}" />
