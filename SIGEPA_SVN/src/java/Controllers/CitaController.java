@@ -7,6 +7,7 @@ import Entities.Auxiliar;
 import Entities.CitaAsignadaPor;
 import Entities.CitaProcedimiento;
 import Facades.CitaFacade;
+import java.util.List;
 
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -26,6 +27,7 @@ public class CitaController {
 
     private Cita current;
     private DataModel items = null;
+    private DataModel itemsProc = null;
     @EJB private Facades.CitaFacade ejbFacade;
     @EJB private Facades.CitaAsignadaPorFacade facade_citaAsignadaPor;
     @EJB private Facades.CitaProcedimientoFacade facade_citaProcedimiento;
@@ -59,6 +61,14 @@ public class CitaController {
 
     public void setEntity_cita_asignada_por(CitaAsignadaPor entity_cita_asignada_por) {
         this.entity_cita_asignada_por = entity_cita_asignada_por;
+    }
+
+    public DataModel getItemsProc() {
+        return itemsProc;
+    }
+
+    public void setItemsProc(DataModel itemsProc) {
+        this.itemsProc = itemsProc;
     }
 /*
     public Auxiliar getAuxiliar() {
@@ -116,6 +126,11 @@ public class CitaController {
 
     public String prepareView() {
         current = (Cita)getItems().getRowData();
+        entity_cita_asignada_por=facade_citaAsignadaPor.findByCita(current);
+
+        itemsProc=new ListDataModel(facade_citaProcedimiento.findProcByCita(current));
+
+
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
@@ -264,6 +279,8 @@ public class CitaController {
             sb.append(value);
             return sb.toString();
         }
+
+
 
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
