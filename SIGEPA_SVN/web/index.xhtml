@@ -7,47 +7,54 @@
         <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
-        <h1 align="center"> Bienvenido a SIGEPA Pastu :P </h1>
+
         <h:form>
-            <h:commandLink action="/admin/auxiliar/List" value="Mostrar todos los Auxliares"/>
+            <h:panelGrid columns="7" >
+                <h:outputLabel value="#{bundle.SessionLabel_login}:" for="login" />
+                <h:inputText id="login" value="#{sesiones.usuario}" title="login" />
+                <h:outputLabel value="#{bundle.SessionLabel_password}:" for="password" />
+                <h:inputSecret id="password" value="#{sesiones.passwd}" title="passwd"/>
+
+                <h:commandButton  action="#{sesiones.validar}" value="Entrar" />
+                <h:commandButton  action="#{sesiones.cerrarSession}" value="Salir" />
+
+                <h:outputText value="Rol: #{sesiones.rol}" />
+            </h:panelGrid>
         </h:form>
-        <h:form>
-            <h:commandLink action="/admin/cita/List" value="Mostrar todas las Citas"/>
-        </h:form>
-        <h:form>
-            <h:commandLink action="/admin/citaAsignadaPor/List" value="Mostrar todas las Citas por Asignacion"/>
-        </h:form>
-        <h:form>
-            <h:commandLink action="/admin/citaProcedimiento/List" value="Mostrar todas las Citas-Procedimiento"/>
-        </h:form>
-        <h:form>
-            <h:commandLink action="/admin/factura/List" value="Mostrar todas las Facturas"/>
-        </h:form>
-        <h:form>
-            <h:commandLink action="/admin/historiaClinica/List" value="Mostrar todas las Historias Clinicas"/>
-        </h:form>
-        <h:form>
-            <h:commandLink action="/admin/odontologo/List" value="Mostrar todos los Odontologos"/>
-        </h:form>
-        <h:form>
-            <h:commandLink action="/admin/paciente/List" value="Mostrar todos los Pacientes"/>
-        </h:form>
-        <h:form>
-            <h:commandLink action="/admin/procedimiento/List" value="Mostrar todos los Procedimientos"/>
-        </h:form>
-        <h:form>
-            <h:commandLink action="/admin/usuario/List" value="Mostrar todos los Usuarios"/>
-        </h:form>
+
+        <h1 align="center"> Bienvenido a SIGEPA </h1>
+        <h:panelGrid rendered="#{sesiones.validado}">
+            <h:form>
+                <h:commandLink action="/admin/auxiliar/List" value="Mostrar todos los Auxliares"/>
+            </h:form>
+            <h:form>
+                <h:commandLink action="/admin/cita/List" value="Mostrar todas las Citas"/>
+            </h:form>
+            <h:form>
+                <h:commandLink action="/admin/citaAsignadaPor/List" value="Mostrar todas las Citas por Asignacion"/>
+            </h:form>
+            <h:form>
+                <h:commandLink action="/admin/citaProcedimiento/List" value="Mostrar todas las Citas-Procedimiento"/>
+            </h:form>
+            <h:form>
+                <h:commandLink action="/admin/factura/List" value="Mostrar todas las Facturas"/>
+            </h:form>
+            <h:form>
+                <h:commandLink action="/admin/historiaClinica/List" value="Mostrar todas las Historias Clinicas"/>
+            </h:form>
+            <h:form>
+                <h:commandLink action="/admin/odontologo/List" value="Mostrar todos los Odontologos"/>
+            </h:form>
+            <h:form>
+                <h:commandLink action="/admin/paciente/List" value="Mostrar todos los Pacientes"/>
+            </h:form>
+            <h:form>
+                <h:commandLink action="/admin/procedimiento/List" value="Mostrar todos los Procedimientos"/>
+            </h:form>
+            <h:form>
+                <h:commandLink action="/admin/usuario/List" value="Mostrar todos los Usuarios"/>
+            </h:form>
+        </h:panelGrid>
     </h:body>
-
-
-
-
-
-
-
-
-
-
 </html>
 

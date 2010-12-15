@@ -12,9 +12,7 @@
         <!--        <script type="text/javascript" src="js/jquery.js"></script>-->
         <script type="text/javascript">
           jQuery(document).ready(function() {
-//            alert('hola');
-
-cambiar_rol_nuevo_usuario();
+                cambiar_rol_nuevo_usuario();
          });
 
          function cambiar_rol_nuevo_usuario(){
@@ -35,8 +33,21 @@ cambiar_rol_nuevo_usuario();
     </h:head>
 
     <h:body>
+        <h:form>
+            <h:panelGrid columns="7" >
+                <h:outputLabel value="#{bundle.SessionLabel_login}:" for="login" />
+                <h:inputText id="login" value="#{sesiones.usuario}" title="login" />
+                <h:outputLabel value="#{bundle.SessionLabel_password}:" for="password" />
+                <h:inputSecret id="password" value="#{sesiones.passwd}" title="passwd"/>
+                
+                <h:commandButton  action="#{sesiones.validar}" value="Entrar" />
+                <h:commandButton  action="#{sesiones.cerrarSession}" value="Salir" />
+
+                <h:outputText value="Rol: #{sesiones.rol}" />
+            </h:panelGrid>
+        </h:form>
         <h1>
-            <ui:insert name="title">Default Title</ui:insert>
+            <ui:insert name="title" >Default Title</ui:insert>
         </h1>
         <p>
             <ui:insert name="body">Default Body</ui:insert>
