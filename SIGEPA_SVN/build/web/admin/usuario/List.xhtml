@@ -27,12 +27,7 @@
                     <h:commandLink action="#{usuarioController.previous}" value="#{bundle.Previous} #{usuarioController.pagination.pageSize}" rendered="#{usuarioController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{usuarioController.next}" value="#{bundle.Next} #{usuarioController.pagination.pageSize}" rendered="#{usuarioController.pagination.hasNextPage}"/>&nbsp;
                     <h:dataTable value="#{usuarioController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_codigo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.codigo}"/>
-                        </h:column>
+                       
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsuarioTitle_cedula}"/>

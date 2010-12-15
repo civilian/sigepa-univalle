@@ -14,11 +14,25 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewAuxiliarLabel_codauxiliar}"/>
-                    <h:outputText value="#{auxiliarController.selected.codauxiliar}" title="#{bundle.ViewAuxiliarTitle_codauxiliar}"/>
-                    <h:outputText value="#{bundle.ViewAuxiliarLabel_usuario}"/>
-                    <h:outputText value="#{auxiliarController.selected.usuario}" title="#{bundle.ViewAuxiliarTitle_usuario}"/>
+                <h:panelGrid columns="2">                    
+                    <h:outputText value="#{bundle.ViewUsuarioLabel_cedula}"/>
+                    <h:outputText value="#{auxiliarController.selected.usuario.cedula}" title="#{bundle.ViewUsuarioTitle_cedula}"/>
+                    <h:outputText value="#{bundle.ViewUsuarioLabel_nombre}"/>
+                    <h:outputText value="#{auxiliarController.selected.usuario.nombre}" title="#{bundle.ViewUsuarioTitle_nombre}"/>
+                    <h:outputText value="#{bundle.ViewUsuarioLabel_apellido}"/>
+                    <h:outputText value="#{auxiliarController.selected.usuario.apellido}" title="#{bundle.ViewUsuarioTitle_apellido}"/>
+                    <h:outputText value="#{bundle.ViewUsuarioLabel_sexo}"/>
+                    <h:outputText value="#{auxiliarController.selected.usuario.sexo}" title="#{bundle.ViewUsuarioTitle_sexo}"/>
+                    <h:outputText value="#{bundle.ViewUsuarioLabel_telefono}"/>
+                    <h:outputText value="#{auxiliarController.selected.usuario.telefono}" title="#{bundle.ViewUsuarioTitle_telefono}"/>
+                    <h:outputText value="#{bundle.ViewUsuarioLabel_direccion}"/>
+                    <h:outputText value="#{auxiliarController.selected.usuario.direccion}" title="#{bundle.ViewUsuarioTitle_direccion}"/>
+                    <h:outputText value="#{bundle.ViewUsuarioLabel_email}"/>
+                    <h:outputText value="#{auxiliarController.selected.usuario.email}" title="#{bundle.ViewUsuarioTitle_email}"/>
+                    <h:outputText value="#{bundle.ViewUsuarioLabel_login}"/>
+                    <h:outputText value="#{auxiliarController.selected.usuario.login}" title="#{bundle.ViewUsuarioTitle_login}"/>
+                    <h:outputText value="#{bundle.ViewUsuarioLabel_contrasena}"/>
+                    <h:outputText value="#{auxiliarController.selected.usuario.contrasena}" title="#{bundle.ViewUsuarioTitle_contrasena}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{auxiliarController.destroyAndView}" value="#{bundle.ViewAuxiliarDestroyLink}"/>

@@ -23,39 +23,42 @@
                     <h:outputText value="#{bundle.ViewCitaLabel_estado}"/>
                     <h:outputText value="#{citaController.selected.estado}" title="#{bundle.ViewCitaTitle_estado}"/>
                     <h:outputText value="#{bundle.ViewCitaLabel_paciente}"/>
-                    <h:outputText value="#{citaController.selected.paciente}" title="#{bundle.ViewCitaTitle_paciente}"/>
+                    <h:outputText value="#{citaController.selected.paciente.nombre} #{citaController.selected.paciente.apellido}" title="#{bundle.ViewCitaTitle_paciente}"/>
                     <h:outputText value="#{bundle.ViewCitaLabel_odontologo}"/>
-                    <h:outputText value="#{citaController.selected.odontologo}" title="#{bundle.ViewCitaTitle_odontologo}"/>
+                    <h:outputText value=" #{citaController.selected.odontologo.usuario.nombre} #{citaController.selected.odontologo.usuario.apellido}" title="#{bundle.ViewCitaTitle_odontologo}"/>
                     <h:outputText value="#{bundle.ViewCitaAsignadaPorLabel_auxiliar}"/>
-                    <h:outputText value="#{citaController.entity_cita_asignada_por.auxiliar.usuario.nombre} - #{citaController.entity_cita_asignada_por.auxiliar.usuario.apellido}" title="#{bundle.ViewCitaAsignadaPorTitle_auxiliar}"/>
+                    <h:outputText value="#{citaController.entity_cita_asignada_por.auxiliar.usuario.nombre} #{citaController.entity_cita_asignada_por.auxiliar.usuario.apellido}" title="#{bundle.ViewCitaAsignadaPorTitle_auxiliar}"/>
+
+                    <h:outputText value="Procedimientos:"/>
+                    </h:panelGrid>
                     <h:dataTable value="#{citaController.itemsProc}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">                                       
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ViewProcedimientoLabel_nombre}"/>
+                                <h:outputText value="#{bundle.ListProcedimientoTitle_nombre}"/>
                             </f:facet>
                             <h:outputText value="#{item.procedimiento.nombre}"/>
                         </h:column>
-<!--                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCitaTitle_odontologo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.procedimiento.tDuracion}"/>
-                        </h:column>-->
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ViewProcedimientoLabel_costo}"/>
+                                <h:outputText value="#{bundle.ListProcedimientoTitle_TDuracion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.procedimiento.TDuracion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProcedimientoTitle_costo}"/>
                             </f:facet>
                             <h:outputText value="#{item.procedimiento.costo}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                               <h:outputText value="#{bundle.ViewCitaProcedimientoLabel_observaciones}"/>
+                               <h:outputText value="#{bundle.ListCitaProcedimientoTitle_observaciones}"/>
                             </f:facet>
                             <h:outputText value="#{item.observaciones}"/>
                         </h:column>
                         
                 </h:dataTable>
-                </h:panelGrid>
+                
                 <br />
                 <h:commandLink action="#{citaController.destroyAndView}" value="#{bundle.ViewCitaDestroyLink}"/>
                 <br />

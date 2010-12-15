@@ -14,9 +14,7 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewPacienteLabel_codpaciente}"/>
-                    <h:outputText value="#{pacienteController.selected.codpaciente}" title="#{bundle.ViewPacienteTitle_codpaciente}"/>
+                <h:panelGrid columns="2">                   
                     <h:outputText value="#{bundle.ViewPacienteLabel_cedula}"/>
                     <h:outputText value="#{pacienteController.selected.cedula}" title="#{bundle.ViewPacienteTitle_cedula}"/>
                     <h:outputText value="#{bundle.ViewPacienteLabel_nombre}"/>

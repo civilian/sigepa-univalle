@@ -15,8 +15,7 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditPacienteLabel_codpaciente}" for="codpaciente" />
-                    <h:inputText id="codpaciente" value="#{pacienteController.selected.codpaciente}" title="#{bundle.EditPacienteTitle_codpaciente}" required="true" requiredMessage="#{bundle.EditPacienteRequiredMessage_codpaciente}"/>
+                   
                     <h:outputLabel value="#{bundle.EditPacienteLabel_cedula}" for="cedula" />
                     <h:inputText id="cedula" value="#{pacienteController.selected.cedula}" title="#{bundle.EditPacienteTitle_cedula}" required="true" requiredMessage="#{bundle.EditPacienteRequiredMessage_cedula}"/>
                     <h:outputLabel value="#{bundle.EditPacienteLabel_nombre}" for="nombre" />
@@ -38,7 +37,7 @@
                     <h:outputLabel value="#{bundle.EditPacienteLabel_rh}" for="rh" />
                     <h:inputText id="rh" value="#{pacienteController.selected.rh}" title="#{bundle.EditPacienteTitle_rh}" required="true" requiredMessage="#{bundle.EditPacienteRequiredMessage_rh}"/>
                     <h:outputLabel value="#{bundle.EditPacienteLabel_antecedentesMedicos}" for="antecedentesMedicos" />
-                    <h:inputText id="antecedentesMedicos" value="#{pacienteController.selected.antecedentesMedicos}" title="#{bundle.EditPacienteTitle_antecedentesMedicos}" />
+                    <h:inputTextarea  id="antecedentesMedicos" value="#{pacienteController.selected.antecedentesMedicos}" title="#{bundle.EditPacienteTitle_antecedentesMedicos}" />
                 </h:panelGrid>
                 <h:commandLink action="#{pacienteController.update}" value="#{bundle.EditPacienteSaveLink}"/>
                 <br />

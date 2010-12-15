@@ -24,6 +24,7 @@ public class AuxiliarController {
     private Auxiliar current;
     private DataModel items = null;
     @EJB private Facades.AuxiliarFacade ejbFacade;
+    @EJB private Facades.UsuarioFacade facade_usuario;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -97,6 +98,9 @@ public class AuxiliarController {
     public String update() {
         try {
             getFacade().edit(current);
+
+            facade_usuario.edit(current.getUsuario());
+
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AuxiliarUpdated"));
             return "View";
         } catch (Exception e) {

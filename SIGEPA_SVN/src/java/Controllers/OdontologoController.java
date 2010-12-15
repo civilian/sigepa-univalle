@@ -24,6 +24,7 @@ public class OdontologoController {
     private Odontologo current;
     private DataModel items = null;
     @EJB private Facades.OdontologoFacade ejbFacade;
+    @EJB private Facades.UsuarioFacade facade_usuario;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -90,6 +91,7 @@ public class OdontologoController {
 
     public String prepareEdit() {
         current = (Odontologo)getItems().getRowData();
+        facade_usuario.edit(current.getUsuario());
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }

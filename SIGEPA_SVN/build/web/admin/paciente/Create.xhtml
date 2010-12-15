@@ -37,7 +37,7 @@
                     <h:outputLabel value="#{bundle.CreatePacienteLabel_rh}" for="rh" />
                     <h:inputText id="rh" value="#{pacienteController.selected.rh}" title="#{bundle.CreatePacienteTitle_rh}" required="true" requiredMessage="#{bundle.CreatePacienteRequiredMessage_rh}"/>
                     <h:outputLabel value="#{bundle.CreatePacienteLabel_antecedentesMedicos}" for="antecedentesMedicos" />
-                    <h:inputText id="antecedentesMedicos" value="#{pacienteController.selected.antecedentesMedicos}" title="#{bundle.CreatePacienteTitle_antecedentesMedicos}" />
+                    <h:inputTextarea  id="antecedentesMedicos" value="#{pacienteController.selected.antecedentesMedicos}" title="#{bundle.CreatePacienteTitle_antecedentesMedicos}" />
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{pacienteController.create}" value="#{bundle.CreatePacienteSaveLink}" />

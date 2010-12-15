@@ -165,6 +165,11 @@ public class CitaController {
 
     public String prepareEdit() {
         current = (Cita)getItems().getRowData();
+
+        entity_cita_asignada_por=facade_citaAsignadaPor.findByCita(current);
+
+        itemsProc=new ListDataModel(facade_citaProcedimiento.findProcByCita(current));
+
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -172,6 +177,16 @@ public class CitaController {
     public String update() {
         try {
             getFacade().edit(current);
+            int index=0;
+           for(int i=0; i<itemsProc.getRowCount() ; i++)
+           {
+               itemsProc.setRowIndex(i);
+               if(itemsProc.isRowAvailable())
+               {
+                 facade_citaProcedimiento.edit((CitaProcedimiento)getItemsProc().getRowData());
+               }
+           }
+
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CitaUpdated"));
             return "View";
         } catch (Exception e) {
@@ -179,6 +194,30 @@ public class CitaController {
             return null;
         }
     }
+
+    public void updateProc()
+    {        
+         try {
+            facade_citaProcedimiento.edit((CitaProcedimiento)getItemsProc().getRowData());
+            }
+         catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return;
+        }
+    }
+
+    public void destroyProc()
+    {
+        try {
+            entity_citaProcedimiento=(CitaProcedimiento)getItemsProc().getRowData();
+             facade_citaProcedimiento.remove(entity_citaProcedimiento);
+             }
+         catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+        return;
+    }
+
 
     public String destroy() {
         current = (Cita)getItems().getRowData();

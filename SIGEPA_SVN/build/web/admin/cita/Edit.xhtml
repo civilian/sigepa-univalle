@@ -15,8 +15,6 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditCitaLabel_codigo}" for="codigo" />
-                    <h:inputText id="codigo" value="#{citaController.selected.codigo}" title="#{bundle.EditCitaTitle_codigo}" required="true" requiredMessage="#{bundle.EditCitaRequiredMessage_codigo}"/>
                     <h:outputLabel value="#{bundle.EditCitaLabel_fechaHora}" for="fechaHora" />
                     <h:inputText id="fechaHora" value="#{citaController.selected.fechaHora}" title="#{bundle.EditCitaTitle_fechaHora}" >
                         <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -31,7 +29,50 @@
                     <h:selectOneMenu id="odontologo" value="#{citaController.selected.odontologo}" title="#{bundle.EditCitaTitle_odontologo}" >
                         <f:selectItems value="#{odontologoController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
-                </h:panelGrid>
+<!--                    <h:outputLabel value="#{bundle.EditCitaAsignadaPorLabel_auxiliar}" for="auxiliar" />
+                    <h:selectOneMenu id="auxiliar" value="#{citaController.entity_cita_asignada_por.auxiliar}" title="#{bundle.EditCitaAsignadaPorTitle_auxiliar}" >
+                        <f:selectItems value="#{auxiliarController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>-->
+                    </h:panelGrid>
+                     <h:outputLabel value="Procedimientos:" />
+                     <h:dataTable value="#{citaController.itemsProc}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProcedimientoTitle_nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.procedimiento.nombre}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProcedimientoTitle_TDuracion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.procedimiento.TDuracion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProcedimientoTitle_costo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.procedimiento.costo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                               <h:outputText value="#{bundle.ListCitaProcedimientoTitle_observaciones}"/>
+                            </f:facet>
+                            <h:inputTextarea value="#{item.observaciones}"/>
+                        </h:column>
+                         <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                              <h:outputText value=" "/>
+                            <h:commandLink action="#{citaController.updateProc}" value="#{bundle.EditCitaSaveLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{citaController.destroyProc}" value="#{bundle.ListCitaDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+
+
+                
                 <h:commandLink action="#{citaController.update}" value="#{bundle.EditCitaSaveLink}"/>
                 <br />
                 <br />

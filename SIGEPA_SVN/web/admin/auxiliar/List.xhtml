@@ -19,18 +19,24 @@
                 <h:outputText value="#{auxiliarController.pagination.pageFirstItem + 1}..#{auxiliarController.pagination.pageLastItem + 1}/#{auxiliarController.pagination.itemsCount}"/>&nbsp;
                 <h:commandLink action="#{auxiliarController.previous}" value="#{bundle.Previous} #{auxiliarController.pagination.pageSize}" rendered="#{auxiliarController.pagination.hasPreviousPage}"/>&nbsp;
                 <h:commandLink action="#{auxiliarController.next}" value="#{bundle.Next} #{auxiliarController.pagination.pageSize}" rendered="#{auxiliarController.pagination.hasNextPage}"/>&nbsp;
-                <h:dataTable value="#{auxiliarController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                <h:dataTable value="#{auxiliarController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">                    
                     <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListAuxiliarTitle_codauxiliar}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.codauxiliar}"/>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUsuarioTitle_cedula}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.usuario.cedula}"/>
+                     </h:column>
+                    <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUsuarioTitle_nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.usuario.nombre}"/>
                     </h:column>
                     <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListAuxiliarTitle_usuario}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.usuario}"/>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUsuarioTitle_apellido}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.usuario.apellido}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
