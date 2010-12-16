@@ -14,7 +14,7 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListUsuarioTitle}"></h:outputText>
+            <h:outputText value="#{bundle.Reportes_Title}"></h:outputText>
         </ui:define>
         <ui:define name="body">
             <h:form styleClass="jsfcrud_list_form" >
@@ -25,13 +25,13 @@
                     <h:dataTable value="#{reportesController.reportesitos}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_cedula}"/>
+                                <h:outputText value="#{bundle.Reportes_Nombre}"/>
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_nombre}"/>
+                                <h:outputText value="#{bundle.Reportes_Cantidad}"/>
                             </f:facet>
                             <h:outputText value="#{item.cantidad}"/>
                         </h:column>
@@ -39,7 +39,16 @@
                     </h:dataTable>
                 </h:panelGroup>
                 <br />
+                <h:outputText value="#{bundle.Reportes_ingresaFecha}"/>
+                <br />
+                <h:inputText id="mes" value="#{reportesController.mes}" title="mes" />
+                <br />
+                <br />
                 <h:commandLink action="#{reportesController.cantidadPacientesXOdontologo}" value="consultar numero de pacientes por odontologo" rendered="#{sesiones.rol=='Odontologo'}"/>
+                <br />
+                <h:commandLink action="#{reportesController.cantidadPacientesXAuxiliar}" value="consultar numero de pacientes por auxiliar" rendered="#{sesiones.rol=='Odontologo'}"/>
+                <br />
+                <h:commandLink action="#{reportesController.cantidadPacientesXProcedimiento}" value="consultar numero de pacientes por procedimiento" rendered="#{sesiones.rol=='Odontologo'}"/>
                 <br />
                 <br />
                 <h:commandLink value="#{bundle.ListUsuarioIndexLink}" action="/index" immediate="true" />

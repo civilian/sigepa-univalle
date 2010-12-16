@@ -4,6 +4,7 @@
  */
 package Controllers;
 
+import Facades.AuxiliarFacade;
 import Reportes.Reporte;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,13 +25,23 @@ public class ReportesController {
 
     private List datos;
     private ArrayList<Reporte> reportesitos;
+    private String mes="12/2010";
     @EJB
-    private Facades.OdontologoFacade facade_odontologo;
+    private Facades.UsuarioFacade facade;
+
 
     /** Creates a new instance of ReportesController */
     public ReportesController() {
     }
 
+    public String getMes() {
+        return mes;
+    }
+
+    public void setMes(String mes) {
+        this.mes = mes;
+    }
+    
     public ArrayList<Reporte> getReportesitos() {
         
         return reportesitos;
@@ -41,7 +52,7 @@ public class ReportesController {
     }
 
     public String cantidadPacientesXOdontologo(){
-        datos = facade_odontologo.findPacientesOdontologo();
+        datos = facade.findPacientesOdontologo(mes);
 
         Vector x = (Vector) datos;
         reportesitos = new ArrayList<Reporte>();
@@ -59,7 +70,41 @@ public class ReportesController {
         return "List";
     }
 
-    public void cantidadPacientesXProcedimiento(){
+    public String cantidadPacientesXAuxiliar(){
+        datos = facade.findPacientesAuxiliar(mes);
 
+        Vector x = (Vector) datos;
+        reportesitos = new ArrayList<Reporte>();
+
+        for (Iterator it = x.iterator(); it.hasNext();) {
+
+            Object[] reporte = (Object[]) it.next();
+            String nombre = (String) reporte[0];
+            int cantidad = ((Long) reporte[1]).intValue();
+
+            Reporte r = new Reporte(nombre, cantidad);
+            reportesitos.add(r);
+        }
+
+        return "List";
+    }
+
+    public String cantidadPacientesXProcedimiento(){
+        datos = facade.findPacientesProcedimiento(mes);
+
+        Vector x = (Vector) datos;
+        reportesitos = new ArrayList<Reporte>();
+
+        for (Iterator it = x.iterator(); it.hasNext();) {
+
+            Object[] reporte = (Object[]) it.next();
+            String nombre = (String) reporte[0];
+            int cantidad = ((Long) reporte[1]).intValue();
+
+            Reporte r = new Reporte(nombre, cantidad);
+            reportesitos.add(r);
+        }
+
+        return "List";
     }
 }
