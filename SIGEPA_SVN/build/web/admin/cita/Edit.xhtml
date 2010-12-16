@@ -13,33 +13,34 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditCitaLabel_fechaHora}" for="fechaHora" />
-                    <h:inputText id="fechaHora" value="#{citaController.selected.fechaHora}" title="#{bundle.EditCitaTitle_fechaHora}" >
-                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.EditCitaLabel_estado}" for="estado" />
-                    <h:selectOneMenu id="estado" value="#{citaController.selected.estado}" title="#{bundle.EditCitaTitle_estado}" >
-                        <f:selectItem  itemLabel="Programada" itemValue="p" />
-                        <f:selectItem itemLabel="Cancelada" itemValue="c" />
-                        <f:selectItem  itemLabel="Realizada" itemValue="r" />
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditCitaLabel_paciente}" for="paciente" />
-                    <h:selectOneMenu id="paciente" value="#{citaController.selected.paciente}" title="#{bundle.EditCitaTitle_paciente}" >
-                        <f:selectItems value="#{pacienteController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditCitaLabel_odontologo}" for="odontologo" />
-                    <h:selectOneMenu id="odontologo" value="#{citaController.selected.odontologo}" title="#{bundle.EditCitaTitle_odontologo}" >
-                        <f:selectItems value="#{odontologoController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-<!--                    <h:outputLabel value="#{bundle.EditCitaAsignadaPorLabel_auxiliar}" for="auxiliar" />
-                    <h:selectOneMenu id="auxiliar" value="#{citaController.entity_cita_asignada_por.auxiliar}" title="#{bundle.EditCitaAsignadaPorTitle_auxiliar}" >
-                        <f:selectItems value="#{auxiliarController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>-->
+            <h:panelGrid columns="2">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{bundle.EditCitaLabel_fechaHora}" for="fechaHora" />
+                        <h:inputText id="fechaHora" value="#{citaController.selected.fechaHora}" title="#{bundle.EditCitaTitle_fechaHora}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:inputText>
+                        <h:outputLabel value="#{bundle.EditCitaLabel_estado}" for="estado" />
+                        <h:selectOneMenu id="estado" value="#{citaController.selected.estado}" title="#{bundle.EditCitaTitle_estado}" >
+                            <f:selectItem  itemLabel="Programada" itemValue="p" />
+                            <f:selectItem itemLabel="Cancelada" itemValue="c" />
+                            <f:selectItem  itemLabel="Realizada" itemValue="r" />
+                        </h:selectOneMenu>
+                        <h:outputLabel value="#{bundle.EditCitaLabel_paciente}" for="paciente" />
+                        <h:selectOneMenu id="paciente" value="#{citaController.selected.paciente}" title="#{bundle.EditCitaTitle_paciente}" >
+                            <f:selectItems value="#{pacienteController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="#{bundle.EditCitaLabel_odontologo}" for="odontologo" />
+                        <h:selectOneMenu id="odontologo" value="#{citaController.selected.odontologo}" title="#{bundle.EditCitaTitle_odontologo}" >
+                            <f:selectItems value="#{odontologoController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+    <!--                    <h:outputLabel value="#{bundle.EditCitaAsignadaPorLabel_auxiliar}" for="auxiliar" />
+                        <h:selectOneMenu id="auxiliar" value="#{citaController.entity_cita_asignada_por.auxiliar}" title="#{bundle.EditCitaAsignadaPorTitle_auxiliar}" >
+                            <f:selectItems value="#{auxiliarController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>-->
                     </h:panelGrid>
-                     <h:outputLabel value="Procedimientos:" />
-                     <h:dataTable value="#{citaController.itemsProc}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <h:outputLabel value="Procedimientos:" />
+                    <h:dataTable value="#{citaController.itemsProc}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListProcedimientoTitle_nombre}"/>
@@ -60,15 +61,15 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                               <h:outputText value="#{bundle.ListCitaProcedimientoTitle_observaciones}"/>
+                                <h:outputText value="#{bundle.ListCitaProcedimientoTitle_observaciones}"/>
                             </f:facet>
                             <h:inputTextarea value="#{item.observaciones}"/>
                         </h:column>
-                         <h:column>
+                        <h:column>
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
-                              <h:outputText value=" "/>
+                            <h:outputText value=" "/>
                             <h:commandLink action="#{citaController.updateProc}" value="#{bundle.EditCitaSaveLink}"/>
                             <h:outputText value=" "/>
                             <h:commandLink action="#{citaController.destroyProc}" value="#{bundle.ListCitaDestroyLink}"/>
@@ -76,21 +77,22 @@
                     </h:dataTable>
 
 
-                <br />
-                <h:commandLink action="#{facturaController.generarFactura}" >
-                    <f:param id="miCita" name="miIdCita" value="#{citaController.selected.codigo}"/>
-                    <h:outputText value="Ver Factura" />
-                </h:commandLink>
-                <h:commandLink action="#{citaController.update}" value="#{bundle.EditCitaSaveLink}"/>
-                <br />
-                <br />
-                <h:commandLink action="View" value="#{bundle.EditCitaViewLink}" immediate="true"/>
-                <br />
-                <h:commandLink action="#{citaController.prepareList}" value="#{bundle.EditCitaShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:commandLink value="#{bundle.EditCitaIndexLink}" action="/index" immediate="true" />
-            </h:form>
+                    <br />
+                    <h:commandLink action="#{facturaController.generarFactura}" >
+                        <f:param id="miCita" name="miIdCita" value="#{citaController.selected.codigo}"/>
+                        <h:outputText value="Ver Factura" />
+                    </h:commandLink>
+                    <h:commandLink action="#{citaController.update}" value="#{bundle.EditCitaSaveLink}"/>
+                    <br />
+                    <br />
+                    <h:commandLink action="View" value="#{bundle.EditCitaViewLink}" immediate="true"/>
+                    <br />
+                    <h:commandLink action="#{citaController.prepareList}" value="#{bundle.EditCitaShowAllLink}" immediate="true"/>
+                    <br />
+                    <br />
+                    <h:commandLink value="#{bundle.EditCitaIndexLink}" action="/index" immediate="true" />
+                </h:form>
+            </h:panelGrid>
         </ui:define>
     </ui:composition>
 

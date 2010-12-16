@@ -7,6 +7,7 @@ import Entities.Auxiliar;
 import Entities.CitaAsignadaPor;
 import Entities.CitaProcedimiento;
 import Facades.CitaFacade;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.persistence.metamodel.ListAttribute;
 
 @ManagedBean (name="citaController")
 @SessionScoped
@@ -41,6 +43,8 @@ public class CitaController {
     private String estadoCita="";
     private String facturaCita="";
     private boolean facturaCreada=false;
+
+    private ArrayList <CitaProcedimiento> procedimientos_cita =new ArrayList<CitaProcedimiento>();
 
 
     public CitaController() {
@@ -191,12 +195,21 @@ public class CitaController {
                       
             //entity_cita_asignada_por.setAuxiliar(auxiliar);
             entity_cita_asignada_por.setCita(current);
+
             facade_citaAsignadaPor.create(entity_cita_asignada_por);
 
             //entity_citaProcedimiento.setObservaciones(observaciones);
             //entity_citaProcedimiento.set
-            entity_citaProcedimiento.setCita(current);
-            facade_citaProcedimiento.create(entity_citaProcedimiento);
+
+
+            for(int i = 0 ; i< procedimientos_cita.size(); i++){
+                CitaProcedimiento cp=procedimientos_cita.get(i);
+                cp.setCita(current);
+                facade_citaProcedimiento.create(cp);
+            }
+//            entity_citaProcedimiento.setCita(current);
+//            facade_citaProcedimiento.create(entity_citaProcedimiento);
+            procedimientos_cita =new ArrayList<CitaProcedimiento>();
 
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CitaCreated"));
             return prepareCreate();
@@ -204,6 +217,12 @@ public class CitaController {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
+    }
+
+    public String agregarProcedimientos(){
+        procedimientos_cita.add(entity_citaProcedimiento);
+        entity_citaProcedimiento= new CitaProcedimiento();
+        return "Create";
     }
 
     public String prepareEdit() {
@@ -418,9 +437,16 @@ public class CitaController {
             }
         }
 
-
-
-
     }
+
+    public ArrayList<CitaProcedimiento> getProcedimientos_cita() {
+        return procedimientos_cita;
+    }
+
+    public void setProcedimientos_cita(ArrayList<CitaProcedimiento> procedimientos_cita) {
+        this.procedimientos_cita = procedimientos_cita;
+    }
+
+    
 
 }

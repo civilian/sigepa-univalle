@@ -13,52 +13,86 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">                   
-                    <h:outputLabel value="#{bundle.CreateCitaLabel_fechaHora}" for="fechaHora" />
-                    <h:inputText id="fechaHora" value="#{citaController.selected.fechaHora}" title="#{bundle.CreateCitaTitle_fechaHora}" required="true" requiredMessage="El campo fecha es obligatorio">
-                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateCitaLabel_estado}" for="estado" />
 
-                    <h:selectOneMenu id="estado" value="#{citaController.selected.estado}" title="#{bundle.CreateCitaTitle_estado}" >
-                        <f:selectItem  itemLabel="Programada" itemValue="p" />
-                        <f:selectItem itemLabel="Cancelada" itemValue="c" />
-                        <f:selectItem  itemLabel="Realizada" itemValue="r" />
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateCitaLabel_paciente}" for="paciente" />
-                    <h:selectOneMenu id="paciente" value="#{citaController.selected.paciente}" title="#{bundle.CreateCitaTitle_paciente}"  required="true" requiredMessage="El campo paciente es obligatorio" >
-                        <f:selectItems value="#{pacienteController.itemsAvailableSelectOne}" />
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateCitaLabel_odontologo}" for="odontologo" />
-                    <h:selectOneMenu id="odontologo" value="#{citaController.selected.odontologo}" title="#{bundle.CreateCitaTitle_odontologo}" required="true" requiredMessage="El campo odontologo es obligatorio">
-                        <f:selectItems value="#{odontologoController.itemsAvailableSelectOne}" />
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateCitaProcedimientoLabel_procedimiento}" for="procedimiento" />
-                    <h:selectOneMenu id="procedimiento" value="#{citaController.entity_citaProcedimiento.procedimiento}" title="#{bundle.CreateCitaProcedimientoTitle_procedimiento}"  required="true" requiredMessage="El campo procedimiento es obligatorio" >
-                        <f:selectItems value="#{procedimientoController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-<!--                     <h:outputLabel value="#{bundle.CreateCitaAsignadaPorLabel_auxiliar}" for="auxiliar" />
-                     <h:selectOneMenu id="auxiliar" value="#{citaController.entity_cita_asignada_por.auxiliar}" title="#{bundle.CreateCitaAsignadaPorTitle_auxiliar}" >
-                         <f:selectItems value="#{auxiliarController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>-->
-                    
+            <h:panelGrid columns="2">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{bundle.CreateCitaLabel_fechaHora}" for="fechaHora" />
+                        <h:inputText id="fechaHora" value="#{citaController.selected.fechaHora}" title="#{bundle.CreateCitaTitle_fechaHora}" required="true" requiredMessage="El campo fecha es obligatorio">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:inputText>
+                        <h:outputLabel value="#{bundle.CreateCitaLabel_estado}" for="estado" />
+
+                        <h:selectOneMenu id="estado" value="#{citaController.selected.estado}" title="#{bundle.CreateCitaTitle_estado}" >
+                            <f:selectItem  itemLabel="Programada" itemValue="p" />
+                            <f:selectItem itemLabel="Cancelada" itemValue="c" />
+                            <f:selectItem  itemLabel="Realizada" itemValue="r" />
+                        </h:selectOneMenu>
+                        <h:outputLabel value="#{bundle.CreateCitaLabel_paciente}" for="paciente" />
+                        <h:selectOneMenu id="paciente" value="#{citaController.selected.paciente}" title="#{bundle.CreateCitaTitle_paciente}"  required="true" requiredMessage="El campo paciente es obligatorio" >
+                            <f:selectItems value="#{pacienteController.itemsAvailableSelectOne}" />
+                        </h:selectOneMenu>
+                        <h:outputLabel value="#{bundle.CreateCitaLabel_odontologo}" for="odontologo" />
+                        <h:selectOneMenu id="odontologo" value="#{citaController.selected.odontologo}" title="#{bundle.CreateCitaTitle_odontologo}" required="true" requiredMessage="El campo odontologo es obligatorio">
+                            <f:selectItems value="#{odontologoController.itemsAvailableSelectOne}" />
+                        </h:selectOneMenu>
+
+
+                        <br />
+                        <h:commandLink action="#{citaController.create}" value="#{bundle.CreateCitaSaveLink}" />
+                        <br />
+                        <br />
+                        <h:commandLink action="#{citaController.prepareList}" value="#{bundle.CreateCitaShowAllLink}" immediate="true"/>
+                        <br />
+                        <br />
+                        <h:commandLink value="#{bundle.CreateCitaIndexLink}" action="/index" immediate="true" />
+
                     </h:panelGrid>
-                     <h:outputLabel value="#{bundle.CreateCitaProcedimientoLabel_observaciones}" for="observaciones" />                     
-                     <h:inputTextarea id="observaciones" value="#{citaController.entity_citaProcedimiento.observaciones}" title="#{bundle.CreateCitaProcedimientoTitle_observaciones}"  requiredMessage="#{bundle.CreateCitaProcedimientoRequiredMessage_observaciones}"/>
+                </h:form>
+                <h:form id="form_agregar_proicedimiento_cita">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{bundle.CreateCitaProcedimientoLabel_procedimiento}" for="procedimiento" />
+                        <h:selectOneMenu id="procedimiento" value="#{citaController.entity_citaProcedimiento.procedimiento}" title="#{bundle.CreateCitaProcedimientoTitle_procedimiento}"  required="true" requiredMessage="El campo procedimiento es obligatorio" >
+                            <f:selectItems value="#{procedimientoController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="#{bundle.CreateCitaProcedimientoLabel_observaciones}" for="observaciones" />
+                        <h:inputTextarea id="observaciones" value="#{citaController.entity_citaProcedimiento.observaciones}" title="#{bundle.CreateCitaProcedimientoTitle_observaciones}"  requiredMessage="#{bundle.CreateCitaProcedimientoRequiredMessage_observaciones}"/>
 
-                    
+                        <h:commandLink action="#{citaController.agregarProcedimientos}" value="Agregar Procedimientos"/>
 
-               
-                <br />
-                <h:commandLink action="#{citaController.create}" value="#{bundle.CreateCitaSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{citaController.prepareList}" value="#{bundle.CreateCitaShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:commandLink value="#{bundle.CreateCitaIndexLink}" action="/index" immediate="true" />
-            </h:form>
+                    </h:panelGrid>
+                    <h:panelGrid>
+                        <h:dataTable value="#{citaController.procedimientos_cita}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListProcedimientoTitle_nombre}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.procedimiento.nombre}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListProcedimientoTitle_TDuracion}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.procedimiento.TDuracion}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListProcedimientoTitle_costo}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.procedimiento.costo}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListCitaProcedimientoTitle_observaciones}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.observaciones}"/>
+                            </h:column>
+
+                        </h:dataTable>
+                    </h:panelGrid>
+                </h:form>
+
+            </h:panelGrid>
         </ui:define>
     </ui:composition>
 
