@@ -35,7 +35,7 @@
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_login}" for="login" />
                     <h:inputText id="login" value="#{usuarioController.selected.login}" title="#{bundle.EditUsuarioTitle_login}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_login}"/>
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_contrasena}" for="contrasena" />
-                    <h:inputText id="contrasena" value="#{usuarioController.selected.contrasena}" title="#{bundle.EditUsuarioTitle_contrasena}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_contrasena}"/>
+                    <h:inputSecret id="contrasena" value="#{usuarioController.selected.contrasena}" title="#{bundle.EditUsuarioTitle_contrasena}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_contrasena}"/>
                 </h:panelGrid>
 
                 <h:panelGrid columns="2" id="panel_rol">

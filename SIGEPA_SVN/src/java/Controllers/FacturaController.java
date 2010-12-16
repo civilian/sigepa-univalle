@@ -3,9 +3,13 @@ package Controllers;
 import Entities.Factura;
 import Controllers.util.JsfUtil;
 import Controllers.util.PaginationHelper;
+import Entities.Auxiliar;
 import Entities.Cita;
+import Entities.CitaProcedimiento;
 import Entities.Odontologo;
+import Entities.Paciente;
 import Facades.FacturaFacade;
+import java.util.Date;
 
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -25,16 +29,33 @@ public class FacturaController {
 
     private Factura current;
     private DataModel items = null;
+     private DataModel itemsProc = null;
     @EJB private Facades.FacturaFacade ejbFacade;
+    @EJB private Facades.CitaFacade facade_cita;
+    @EJB private Facades.CitaProcedimientoFacade facade_citaProcedimiento;
 
-    private Cita entity_cita;
-    private Odontologo entity_odontologo;
+    private Cita entity_cita=new Cita();
+    private Odontologo entity_odontologo=new Odontologo();
+    private Paciente entity_paciente=new Paciente();
+    
 
 
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private String idCita="";
+    private Date fechaGeneracion=new Date();
+    private String estadoFactura="";
+    private double total=0.0;
+
+    /*public String getIdCita() {
+        return idCita;
+    }
+*/
+    
 
     public FacturaController() {
+
+    
     }
 
     public Factura getSelected() {
@@ -48,6 +69,51 @@ public class FacturaController {
     private FacturaFacade getFacade() {
         return ejbFacade;
     }
+
+    public Cita getEntity_cita() {
+        return entity_cita;
+    }
+
+    public Paciente getEntity_paciente() {
+        return entity_paciente;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    
+
+    public Date getFechaGeneracion() {
+        return fechaGeneracion;
+    }
+
+    public String getEstadoFactura() {
+
+        if(current.getEstado()=='c')
+        {
+            estadoFactura="Cancelada";
+        }
+        else if(current.getEstado()=='s')
+        {
+             estadoFactura="Sin cancelar";
+        }
+
+        return estadoFactura;
+    }
+
+    
+
+    public Odontologo getEntity_odontologo() {
+        return entity_odontologo;
+    }
+
+    public DataModel getItemsProc() {
+        return itemsProc;
+    }
+
+
+    
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
@@ -67,37 +133,86 @@ public class FacturaController {
         return pagination;
     }
 
-    public String prepareList() {
-        recreateModel();
-        return "List";
-    }
+  
 
-    public String prepareView() {
-        current = (Factura)getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "View";
-    }
+    
 
-    public String prepareCreate() {
-        current = new Factura();
-        selectedItemIndex = -1;
-        return "Create";
-    }
-
-    public String create() {
-        try {
+    public void crearFactura()
+    {
+            current=new Factura();
+             current.setEstado('s');
+            
+             
+             current.setTotal(Float.valueOf(Double.valueOf(total).floatValue()));
+             current.setCita(entity_cita);
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FacturaCreated"));
-            return prepareCreate();
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
-        }
+
+            
     }
+
+
+    public void cargarFactura()
+    {
+        current=getFacade().findFacturaByCita(entity_cita);                
+    }
+
+    public String generarFactura()
+    {
+         FacesContext context = FacesContext.getCurrentInstance();
+         String value []= context.getExternalContext().getRequestParameterValuesMap().get("miIdCita");
+         idCita=value[0];
+         String requestFactura[]=context.getExternalContext().getRequestParameterValuesMap().get("facturaCreada");
+         boolean facturaCreada=Boolean.parseBoolean(requestFactura[0]);
+
+          entity_cita=facade_cita.find(Integer.parseInt(idCita));
+          entity_odontologo=entity_cita.getOdontologo();
+         entity_paciente=entity_cita.getPaciente();
+         itemsProc=new ListDataModel(facade_citaProcedimiento.findProcByCita(entity_cita));
+         total=0.0;
+         for(int i=0; i<itemsProc.getRowCount() ; i++)
+           {
+               itemsProc.setRowIndex(i);
+               if(itemsProc.isRowAvailable())
+               {
+                 total+=(((CitaProcedimiento)getItemsProc().getRowData()).getProcedimiento()).getCosto();
+               }
+           }
+
+         if(facturaCreada)
+         {
+            cargarFactura();
+         }
+         else
+         {
+            crearFactura();            
+         }
+
+         return "../factura/View.xhtml";
+         
+    }
+
+  
 
     public String prepareEdit() {
-        current = (Factura)getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        //current = (Factura)getItems().getRowData();
+
+         entity_cita=facade_cita.find(Integer.parseInt(idCita));
+         entity_odontologo=entity_cita.getOdontologo();
+         entity_paciente=entity_cita.getPaciente();
+         itemsProc=new ListDataModel(facade_citaProcedimiento.findProcByCita(entity_cita));
+         total=0.0;
+         for(int i=0; i<itemsProc.getRowCount() ; i++)
+           {
+               itemsProc.setRowIndex(i);
+               if(itemsProc.isRowAvailable())
+               {
+                 total+=(((CitaProcedimiento)getItemsProc().getRowData()).getProcedimiento()).getCosto();
+               }
+           }
+
+         current.setTotal(Float.valueOf(Double.valueOf(total).floatValue()));
+
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
@@ -112,57 +227,15 @@ public class FacturaController {
         }
     }
 
-    public String destroy() {
-        current = (Factura)getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        performDestroy();
-        recreateModel();
-        return "List";
-    }
+  
 
-    public String destroyAndView() {
-        performDestroy();
-        recreateModel();
-        updateCurrentItem();
-        if (selectedItemIndex >= 0) {
-            return "View";
-        } else {
-            // all items were removed - go back to list
-            recreateModel();
-            return "List";
-        }
-    }
 
-    private void performDestroy() {
-        try {
-            getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FacturaDeleted"));
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-        }
-    }
 
-    private void updateCurrentItem() {
-        int count = getFacade().count();
-        if (selectedItemIndex >= count) {
-            // selected index cannot be bigger than number of items:
-            selectedItemIndex = count-1;
-            // go to previous page if last page disappeared:
-            if (pagination.getPageFirstItem() >= count) {
-                pagination.previousPage();
-            }
-        }
-        if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex+1}).get(0);
-        }
-    }
+   
 
-    public DataModel getItems() {
-        if (items == null) {
-            items = getPagination().createPageDataModel();
-        }
-        return items;
-    }
+    
+
+    
 
     private void recreateModel() {
         items = null;

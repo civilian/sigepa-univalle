@@ -147,7 +147,7 @@ public class OdontologoController {
     public String destroy() {
         current = (Odontologo)getItems().getRowData();
          entity_usuario=current.getUsuario();
-        facade_usuario.remove(entity_usuario);
+        
         
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
@@ -156,6 +156,10 @@ public class OdontologoController {
     }
 
     public String destroyAndView() {
+
+        current = (Odontologo)getItems().getRowData();
+         entity_usuario=current.getUsuario();        
+
         performDestroy();
         recreateModel();
         updateCurrentItem();
@@ -171,6 +175,7 @@ public class OdontologoController {
     private void performDestroy() {
         try {
             getFacade().remove(current);
+            facade_usuario.remove(entity_usuario);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("OdontologoDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));

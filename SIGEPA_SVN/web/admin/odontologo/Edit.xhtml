@@ -35,7 +35,7 @@
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_login}" for="login" />
                     <h:inputText id="login" value="#{odontologoController.entity_usuario.login}" title="#{bundle.EditUsuarioTitle_login}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_login}"/>
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_contrasena}" for="contrasena" />
-                    <h:inputText id="contrasena" value="#{odontologoController.entity_usuario.contrasena}" title="#{bundle.EditUsuarioTitle_contrasena}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_contrasena}"/>
+                    <h:inputSecret id="contrasena" value="#{odontologoController.entity_usuario.contrasena}" title="#{bundle.EditUsuarioTitle_contrasena}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_contrasena}"/>
                     <h:outputLabel value="#{bundle.EditOdontologoLabel_titulo}" for="titulo" />
                     <h:inputText id="titulo" value="#{odontologoController.selected.titulo}" title="#{bundle.EditOdontologoTitle_titulo}" required="true" requiredMessage="#{bundle.EditOdontologoRequiredMessage_titulo}"/>
                     <h:outputLabel value="#{bundle.EditOdontologoLabel_especialidad}" for="especialidad" />

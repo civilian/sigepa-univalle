@@ -209,7 +209,7 @@ public class UsuarioController {
         current = (Usuario) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
 
-        resetValores();
+       
 
         if (current.getOdontologo() != null) {
             entity_odontologo = facade_odontologo.find(current.getCodigo());
@@ -223,10 +223,25 @@ public class UsuarioController {
         }
         performDestroy();
         recreateModel();
+         resetValores();
         return "List";
     }
 
     public String destroyAndView() {
+
+         resetValores();
+
+        if (current.getOdontologo() != null) {
+            entity_odontologo = facade_odontologo.find(current.getCodigo());
+            titulo = entity_odontologo.getTitulo();
+            especialidad = entity_odontologo.getEspecialidad();
+            sel_rol = "Odontologo";
+        }
+        else if(current.getAuxiliar() != null) {
+            entity_auxiliar = facade_auxiliar.find(current.getCodigo());
+            sel_rol = "Auxiliar";
+        }
+
         performDestroy();
         recreateModel();
         updateCurrentItem();

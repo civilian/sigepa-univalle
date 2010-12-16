@@ -32,12 +32,15 @@ public class CitaController {
     @EJB private Facades.CitaFacade ejbFacade;
     @EJB private Facades.CitaAsignadaPorFacade facade_citaAsignadaPor;
     @EJB private Facades.CitaProcedimientoFacade facade_citaProcedimiento;
+    @EJB private Facades.FacturaFacade facade_factura;
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private CitaAsignadaPor entity_cita_asignada_por=new CitaAsignadaPor();
     private CitaProcedimiento entity_citaProcedimiento=new CitaProcedimiento();
 
     private String estadoCita="";
+    private String facturaCita="";
+    private boolean facturaCreada=false;
 
 
     public CitaController() {
@@ -53,7 +56,29 @@ public class CitaController {
         this.entity_citaProcedimiento = entity_citaProcedimiento;
     }
 
-    
+    public String getFacturaCita()
+    {
+
+
+    facturaCreada=facade_factura.findByCita(current);
+
+    if(facturaCreada)
+    {
+        facturaCita="Ver Factura";
+    }
+    else
+    {
+         facturaCita="Generar Factura";
+    }
+
+        return facturaCita;
+    }
+
+    public boolean isFacturaCreada() 
+    {
+        facturaCreada=facade_factura.findByCita(current);
+        return facturaCreada;
+    }   
 
     public CitaAsignadaPor getEntity_cita_asignada_por() {
         return entity_cita_asignada_por;
@@ -133,6 +158,7 @@ public class CitaController {
     public String prepareView() {
         current = (Cita)getItems().getRowData();
         getEstadoCita();
+        getFacturaCita();
         entity_cita_asignada_por=facade_citaAsignadaPor.findByCita(current);
 
         itemsProc=new ListDataModel(facade_citaProcedimiento.findProcByCita(current));
@@ -182,11 +208,9 @@ public class CitaController {
 
     public String prepareEdit() {
         current = (Cita)getItems().getRowData();
-
+        getFacturaCita();
         entity_cita_asignada_por=facade_citaAsignadaPor.findByCita(current);
-
         itemsProc=new ListDataModel(facade_citaProcedimiento.findProcByCita(current));
-
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -252,6 +276,8 @@ public class CitaController {
          itemsProc=new ListDataModel(facade_citaProcedimiento.findProcByCita(current));
          facade_citaAsignadaPor.remove(entity_cita_asignada_por);
 
+         facade_factura.remove(facade_factura.findFacturaByCita(current));
+
          for(int i=0; i<itemsProc.getRowCount() ; i++)
            {
                itemsProc.setRowIndex(i);
@@ -267,7 +293,25 @@ public class CitaController {
         return "List";
     }
 
-    public String destroyAndView() {
+    public String destroyAndView()
+    {
+
+         entity_cita_asignada_por=facade_citaAsignadaPor.findByCita(current);
+         itemsProc=new ListDataModel(facade_citaProcedimiento.findProcByCita(current));
+         facade_citaAsignadaPor.remove(entity_cita_asignada_por);
+         facade_factura.remove(facade_factura.findFacturaByCita(current));
+
+         for(int i=0; i<itemsProc.getRowCount() ; i++)
+           {
+               itemsProc.setRowIndex(i);
+               if(itemsProc.isRowAvailable())
+               {
+                 facade_citaProcedimiento.remove((CitaProcedimiento)getItemsProc().getRowData());
+               }
+           }
+
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+
         performDestroy();
         recreateModel();
         updateCurrentItem();

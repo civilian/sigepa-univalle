@@ -16,22 +16,100 @@
             <h:form>
                 <h:panelGrid columns="2">
                     
+                    <h:outputText value="Fecha y Hora de la Cita: "/>
+                    <h:outputText value="#{facturaController.entity_cita.fechaHora}" title="#{bundle.ViewCitaTitle_fechaHora}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="Fecha Generacion Factura: "/>
+                    <h:outputText value="#{facturaController.fechaGeneracion}" title="#{bundle.ViewCitaTitle_fechaHora}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
                     <h:outputLabel value="#{bundle.EditFacturaLabel_estado}" for="estado" />
-                    <h:inputText id="estado" value="#{facturaController.selected.estado}" title="#{bundle.EditFacturaTitle_estado}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_estado}"/>
-                    <h:outputLabel value="#{bundle.EditFacturaLabel_total}" for="total" />
-                    <h:inputText id="total" value="#{facturaController.selected.total}" title="#{bundle.EditFacturaTitle_total}" />
-                    <h:outputLabel value="#{bundle.EditFacturaLabel_cita}" for="cita" />
-                    <h:selectOneMenu id="cita" value="#{facturaController.selected.cita}" title="#{bundle.EditFacturaTitle_cita}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_cita}">
-                        <f:selectItems value="#{citaController.itemsAvailableSelectOne}"/>
+                    <h:selectOneMenu id="sexo" value="#{facturaController.selected.estado}" title="#{bundle.CreateUsuarioTitle_sexo}" >
+                        <f:selectItem  itemLabel="Sin Cancelar" itemValue='s'  />
+                        <f:selectItem itemLabel="Cancelada" itemValue='c'  />
                     </h:selectOneMenu>
-                </h:panelGrid>
+                    </h:panelGrid>
+                    <br/>
+                     <h:outputText value="Datos de Paciente: "/>
+                <table border="1" cellspacing="1" cellpadding="6">
+                    <thead>
+                        <tr>
+                            <th><h:outputText value="Cedula"/></th>
+                            <th> <h:outputText value="Nombre"/></th>
+                            <th><h:outputText value="Apellido"/></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><h:outputText value="#{facturaController.entity_paciente.cedula}" title="#{bundle.ViewUsuarioTitle_cedula}"/></td>
+                            <td><h:outputText value="#{facturaController.entity_paciente.nombre}" title="#{bundle.ViewPacienteTitle_nombre}"/></td>
+                            <td><h:outputText value="#{facturaController.entity_paciente.apellido}" title="#{bundle.ViewPacienteTitle_apellido}"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <br/>
+                     <h:outputText value="Datos de Odontologo "/>
+                <table border="1" cellspacing="1" cellpadding="6">
+                    <thead>
+                        <tr>
+                            <th><h:outputText value="Cedula"/></th>
+                            <th> <h:outputText value="Nombre"/></th>
+                            <th><h:outputText value="Apellido"/></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><h:outputText value="#{facturaController.entity_odontologo.usuario.cedula}" title="#{bundle.ViewUsuarioTitle_cedula}"/></td>
+                            <td><h:outputText value="#{facturaController.entity_odontologo.usuario.nombre}" title="#{bundle.ViewUsuarioTitle_nombre}"/></td>
+                            <td><h:outputText value="#{facturaController.entity_odontologo.usuario.apellido}" title="#{bundle.ViewUsuarioTitle_apellido}"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+                    
+                
+                     <h:dataTable value="#{facturaController.itemsProc}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProcedimientoTitle_nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.procedimiento.nombre}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProcedimientoTitle_TDuracion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.procedimiento.TDuracion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProcedimientoTitle_costo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.procedimiento.costo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                               <h:outputText value="#{bundle.ListCitaProcedimientoTitle_observaciones}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.observaciones}"  />
+                        </h:column>
+                         
+                    </h:dataTable>
+
+                    <br />
+                
+                    <h:outputLabel value="#{bundle.EditFacturaLabel_total}" for="total" />
+                    <h:outputText value="#{facturaController.selected.total}" title="#{bundle.ViewFacturaTitle_total}"/>
+                    
+                <br />
                 <h:commandLink action="#{facturaController.update}" value="#{bundle.EditFacturaSaveLink}"/>
                 <br />
                 <br />
                 <h:commandLink action="View" value="#{bundle.EditFacturaViewLink}" immediate="true"  />
                 <br />
-                <h:commandLink action="#{facturaController.prepareList}" value="#{bundle.EditFacturaShowAllLink}" immediate="true"/>
-                <br />
+               
                 <br />
                 <h:commandLink value="#{bundle.EditFacturaIndexLink}" action="/index" immediate="true" />
             </h:form>

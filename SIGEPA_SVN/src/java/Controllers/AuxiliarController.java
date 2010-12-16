@@ -152,7 +152,7 @@ public class AuxiliarController {
     public String destroy() {
         current = (Auxiliar)getItems().getRowData();
         entity_usuario=current.getUsuario();
-        facade_usuario.remove(entity_usuario);
+        
 
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
@@ -161,6 +161,9 @@ public class AuxiliarController {
     }
 
     public String destroyAndView() {
+
+        current = (Auxiliar)getItems().getRowData();
+        entity_usuario=current.getUsuario();        
         performDestroy();
         recreateModel();
         updateCurrentItem();
@@ -176,6 +179,7 @@ public class AuxiliarController {
     private void performDestroy() {
         try {
             getFacade().remove(current);
+            facade_usuario.remove(entity_usuario);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AuxiliarDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));

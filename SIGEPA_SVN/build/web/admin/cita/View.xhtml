@@ -61,7 +61,11 @@
 
 
                 <br />
-                <h:commandLink action="../factura/View.xhtml" value="Ver Factura"/>
+                <h:commandLink action="#{facturaController.generarFactura}" >
+                    <f:param id="miCita" name="miIdCita" value="#{citaController.selected.codigo}"/>
+                    <f:param id="miFactCreada" name="facturaCreada" value="#{citaController.facturaCreada}"/>
+                    <h:outputText value="#{citaController.facturaCita}" />
+                </h:commandLink>
                 <br />
                 <h:commandLink action="#{citaController.destroyAndView}" value="#{bundle.ViewCitaDestroyLink}"/>
                 <br />

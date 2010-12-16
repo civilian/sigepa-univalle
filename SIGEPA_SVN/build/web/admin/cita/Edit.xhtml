@@ -76,7 +76,11 @@
                     </h:dataTable>
 
 
-                
+                <br />
+                <h:commandLink action="#{facturaController.generarFactura}" >
+                    <f:param id="miCita" name="miIdCita" value="#{citaController.selected.codigo}"/>
+                    <h:outputText value="Ver Factura" />
+                </h:commandLink>
                 <h:commandLink action="#{citaController.update}" value="#{bundle.EditCitaSaveLink}"/>
                 <br />
                 <br />

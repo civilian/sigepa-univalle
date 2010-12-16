@@ -31,9 +31,7 @@
                     <h:outputText value="#{bundle.ViewUsuarioLabel_email}"/>
                     <h:outputText value="#{usuarioController.selected.email}" title="#{bundle.ViewUsuarioTitle_email}"/>
                     <h:outputText value="#{bundle.ViewUsuarioLabel_login}"/>
-                    <h:outputText value="#{usuarioController.selected.login}" title="#{bundle.ViewUsuarioTitle_login}"/>
-                    <h:outputText value="#{bundle.ViewUsuarioLabel_contrasena}"/>
-                    <h:outputText value="#{usuarioController.selected.contrasena}" title="#{bundle.ViewUsuarioTitle_contrasena}"/>
+                    <h:outputText value="#{usuarioController.selected.login}" title="#{bundle.ViewUsuarioTitle_login}"/>                    
                     <h:outputText value="Es Auxiliar" rendered="#{usuarioController.selected.odontologo == null}"/>
                     <h:outputText value="Es Odontologo" rendered="#{usuarioController.selected.auxiliar == null}"/> 
                 </h:panelGrid>
