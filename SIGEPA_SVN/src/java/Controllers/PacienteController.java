@@ -26,6 +26,7 @@ public class PacienteController {
     @EJB private Facades.PacienteFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private String sexoUsuario="";
 
     public PacienteController() {
     }
@@ -40,6 +41,20 @@ public class PacienteController {
 
     private PacienteFacade getFacade() {
         return ejbFacade;
+    }
+
+     public String getSexoUsuario() {
+
+        if(current.getSexo().equals('f'))
+        {
+            sexoUsuario="Femenino";
+        }
+        else if(current.getSexo().equals('m'))
+        {
+            sexoUsuario="Masculino";
+        }
+
+        return sexoUsuario;
     }
 
     public PaginationHelper getPagination() {
@@ -67,6 +82,7 @@ public class PacienteController {
 
     public String prepareView() {
         current = (Paciente)getItems().getRowData();
+        getSexoUsuario();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }

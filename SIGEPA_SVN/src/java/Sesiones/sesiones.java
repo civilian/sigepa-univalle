@@ -19,6 +19,7 @@ import org.omg.PortableInterceptor.USER_EXCEPTION;
 @SessionScoped
 public class sesiones {
 
+    private int codigo;
     private String usuario;
     private String passwd;
     private String rol = "";
@@ -48,7 +49,9 @@ public class sesiones {
         return "/index";
     }
 
-    public String cerrarSession(){
+    public String cerrarSession()
+    {
+        codigo=0;
         usuario="";
         passwd="";
         rol="";
@@ -90,4 +93,14 @@ public class sesiones {
     public void setValidado(boolean validado) {
         this.validado = validado;
     }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+
 }

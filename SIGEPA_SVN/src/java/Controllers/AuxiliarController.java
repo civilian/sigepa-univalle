@@ -3,6 +3,7 @@ package Controllers;
 import Entities.Auxiliar;
 import Controllers.util.JsfUtil;
 import Controllers.util.PaginationHelper;
+import Entities.Usuario;
 import Facades.AuxiliarFacade;
 
 import java.util.ResourceBundle;
@@ -25,8 +26,10 @@ public class AuxiliarController {
     private DataModel items = null;
     @EJB private Facades.AuxiliarFacade ejbFacade;
     @EJB private Facades.UsuarioFacade facade_usuario;
+    Usuario entity_usuario=new Usuario();
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private String sexoUsuario="";
 
     public AuxiliarController() {
     }
@@ -42,6 +45,30 @@ public class AuxiliarController {
     private AuxiliarFacade getFacade() {
         return ejbFacade;
     }
+
+     public String getSexoUsuario() {
+
+        if(current.getUsuario().getSexo().equals('f'))
+        {
+            sexoUsuario="Femenino";
+        }
+        else if(current.getUsuario().getSexo().equals('m'))
+        {
+            sexoUsuario="Masculino";
+        }
+
+        return sexoUsuario;
+    }
+
+    public Usuario getEntity_usuario() {
+        return entity_usuario;
+    }
+
+    public void setEntity_usuario(Usuario entity_usuario) {
+        this.entity_usuario = entity_usuario;
+    }
+
+    
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
@@ -68,22 +95,32 @@ public class AuxiliarController {
 
     public String prepareView() {
         current = (Auxiliar)getItems().getRowData();
+        entity_usuario=current.getUsuario();
+        getSexoUsuario();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
         current = new Auxiliar();
+        entity_usuario=new Usuario();
+
         selectedItemIndex = -1;
         return "Create";
     }
 
     public String create() {
-        try {
+        try 
+        {
+            facade_usuario.create(entity_usuario);
+            current.setUsuario(entity_usuario);
             getFacade().create(current);
+            
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AuxiliarCreated"));
             return prepareCreate();
-        } catch (Exception e) {
+        } 
+        catch (Exception e)
+        {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
@@ -91,18 +128,21 @@ public class AuxiliarController {
 
     public String prepareEdit() {
         current = (Auxiliar)getItems().getRowData();
+        entity_usuario=current.getUsuario();
+
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
-        try {
-            getFacade().edit(current);
+        try
+        {
+                facade_usuario.edit(entity_usuario);
+                current.setUsuario(entity_usuario);
+                getFacade().edit(current);
 
-            facade_usuario.edit(current.getUsuario());
-
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AuxiliarUpdated"));
-            return "View";
+                JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AuxiliarUpdated"));
+                return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -111,6 +151,9 @@ public class AuxiliarController {
 
     public String destroy() {
         current = (Auxiliar)getItems().getRowData();
+        entity_usuario=current.getUsuario();
+        facade_usuario.remove(entity_usuario);
+
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreateModel();

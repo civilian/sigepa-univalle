@@ -3,6 +3,7 @@ package Controllers;
 import Entities.Odontologo;
 import Controllers.util.JsfUtil;
 import Controllers.util.PaginationHelper;
+import Entities.Usuario;
 import Facades.OdontologoFacade;
 
 import java.util.ResourceBundle;
@@ -25,8 +26,10 @@ public class OdontologoController {
     private DataModel items = null;
     @EJB private Facades.OdontologoFacade ejbFacade;
     @EJB private Facades.UsuarioFacade facade_usuario;
+    Usuario entity_usuario=new Usuario();
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private String sexoUsuario="";
 
     public OdontologoController() {
     }
@@ -38,6 +41,29 @@ public class OdontologoController {
         }
         return current;
     }
+
+    public Usuario getEntity_usuario() {
+        return entity_usuario;
+    }
+
+    public void setEntity_usuario(Usuario  entity_usuario) {
+        this.entity_usuario = entity_usuario;
+    }    
+
+     public String getSexoUsuario() {
+
+        if(current.getUsuario().getSexo().equals('f'))
+        {
+            sexoUsuario="Femenino";
+        }
+        else if(current.getUsuario().getSexo().equals('m'))
+        {
+            sexoUsuario="Masculino";
+        }
+
+        return sexoUsuario;
+    }
+
 
     private OdontologoFacade getFacade() {
         return ejbFacade;
@@ -68,18 +94,25 @@ public class OdontologoController {
 
     public String prepareView() {
         current = (Odontologo)getItems().getRowData();
+        entity_usuario=current.getUsuario();
+        getSexoUsuario();
+        
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
         current = new Odontologo();
+        entity_usuario=new Usuario();
         selectedItemIndex = -1;
         return "Create";
     }
 
     public String create() {
         try {
+
+            facade_usuario.create(entity_usuario);
+            current.setUsuario(entity_usuario);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("OdontologoCreated"));
             return prepareCreate();
@@ -91,13 +124,17 @@ public class OdontologoController {
 
     public String prepareEdit() {
         current = (Odontologo)getItems().getRowData();
-        facade_usuario.edit(current.getUsuario());
+        entity_usuario=current.getUsuario();
+
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
-        try {
+        try 
+        {
+            facade_usuario.edit(entity_usuario);
+            current.setUsuario(entity_usuario);
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("OdontologoUpdated"));
             return "View";
@@ -109,6 +146,9 @@ public class OdontologoController {
 
     public String destroy() {
         current = (Odontologo)getItems().getRowData();
+         entity_usuario=current.getUsuario();
+        facade_usuario.remove(entity_usuario);
+        
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreateModel();

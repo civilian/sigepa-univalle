@@ -39,6 +39,7 @@ public class UsuarioController {
     private String especialidad;
     private String[] rol = {"Auxiliar", "Odontologo"};
     private String sel_rol = "Odontologo";
+    private String sexoUsuario="";
 
     public UsuarioController() {
     }
@@ -54,6 +55,22 @@ public class UsuarioController {
     private UsuarioFacade getFacade() {
         return ejbFacade;
     }
+
+    public String getSexoUsuario() {
+
+        if(current.getSexo().equals('f'))
+        {
+            sexoUsuario="Femenino";
+        }
+        else if(current.getSexo().equals('m'))
+        {
+            sexoUsuario="Masculino";
+        }
+
+        return sexoUsuario;
+    }
+
+    
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
@@ -80,6 +97,7 @@ public class UsuarioController {
 
     public String prepareView() {
         current = (Usuario) getItems().getRowData();
+        getSexoUsuario();
         if (current.getOdontologo() != null) {
             titulo = facade_odontologo.find(current.getCodigo()).getTitulo();
             especialidad = facade_odontologo.find(current.getCodigo()).getEspecialidad();
@@ -199,7 +217,7 @@ public class UsuarioController {
             especialidad = entity_odontologo.getEspecialidad();
             sel_rol = "Odontologo";
         }
-        if (current.getAuxiliar() != null) {
+        else if(current.getAuxiliar() != null) {
             entity_auxiliar = facade_auxiliar.find(current.getCodigo());
             sel_rol = "Auxiliar";
         }

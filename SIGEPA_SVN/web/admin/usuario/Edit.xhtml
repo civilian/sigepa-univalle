@@ -22,7 +22,10 @@
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_apellido}" for="apellido" />
                     <h:inputText id="apellido" value="#{usuarioController.selected.apellido}" title="#{bundle.EditUsuarioTitle_apellido}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_apellido}"/>
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_sexo}" for="sexo" />
-                    <h:inputText id="sexo" value="#{usuarioController.selected.sexo}" title="#{bundle.EditUsuarioTitle_sexo}" />
+                    <h:selectOneMenu id="sexo" value="#{usuarioController.selected.sexo}" title="#{bundle.EditUsuarioTitle_sexo}" >
+                        <f:selectItem  itemLabel="Femenino" itemValue='f'  />
+                        <f:selectItem itemLabel="Masculino" itemValue='m'  />
+                    </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_telefono}" for="telefono" />
                     <h:inputText id="telefono" value="#{usuarioController.selected.telefono}" title="#{bundle.EditUsuarioTitle_telefono}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_telefono}"/>
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_direccion}" for="direccion" />

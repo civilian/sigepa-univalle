@@ -17,10 +17,14 @@
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.EditCitaLabel_fechaHora}" for="fechaHora" />
                     <h:inputText id="fechaHora" value="#{citaController.selected.fechaHora}" title="#{bundle.EditCitaTitle_fechaHora}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:inputText>
                     <h:outputLabel value="#{bundle.EditCitaLabel_estado}" for="estado" />
-                    <h:inputText id="estado" value="#{citaController.selected.estado}" title="#{bundle.EditCitaTitle_estado}" />
+                    <h:selectOneMenu id="estado" value="#{citaController.selected.estado}" title="#{bundle.EditCitaTitle_estado}" >
+                        <f:selectItem  itemLabel="Programada" itemValue="p" />
+                        <f:selectItem itemLabel="Cancelada" itemValue="c" />
+                        <f:selectItem  itemLabel="Realizada" itemValue="r" />
+                    </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.EditCitaLabel_paciente}" for="paciente" />
                     <h:selectOneMenu id="paciente" value="#{citaController.selected.paciente}" title="#{bundle.EditCitaTitle_paciente}" >
                         <f:selectItems value="#{pacienteController.itemsAvailableSelectOne}"/>

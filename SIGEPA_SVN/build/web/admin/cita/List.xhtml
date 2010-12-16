@@ -25,15 +25,9 @@
                             <h:outputText value="#{bundle.ListCitaTitle_fechaHora}"/>
                         </f:facet>
                         <h:outputText value="#{item.fechaHora}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListCitaTitle_estado}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.estado}"/>
-                    </h:column>
+                    </h:column>                   
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListCitaTitle_paciente}"/>

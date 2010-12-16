@@ -3,6 +3,8 @@ package Controllers;
 import Entities.Factura;
 import Controllers.util.JsfUtil;
 import Controllers.util.PaginationHelper;
+import Entities.Cita;
+import Entities.Odontologo;
 import Facades.FacturaFacade;
 
 import java.util.ResourceBundle;
@@ -24,6 +26,11 @@ public class FacturaController {
     private Factura current;
     private DataModel items = null;
     @EJB private Facades.FacturaFacade ejbFacade;
+
+    private Cita entity_cita;
+    private Odontologo entity_odontologo;
+
+
     private PaginationHelper pagination;
     private int selectedItemIndex;
 

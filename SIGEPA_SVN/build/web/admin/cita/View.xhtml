@@ -18,10 +18,10 @@
                    
                     <h:outputText value="#{bundle.ViewCitaLabel_fechaHora}"/>
                     <h:outputText value="#{citaController.selected.fechaHora}" title="#{bundle.ViewCitaTitle_fechaHora}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:outputText>
                     <h:outputText value="#{bundle.ViewCitaLabel_estado}"/>
-                    <h:outputText value="#{citaController.selected.estado}" title="#{bundle.ViewCitaTitle_estado}"/>
+                    <h:outputText value="#{citaController.estadoCita}" title="#{bundle.ViewCitaTitle_estado}"/>
                     <h:outputText value="#{bundle.ViewCitaLabel_paciente}"/>
                     <h:outputText value="#{citaController.selected.paciente.nombre} #{citaController.selected.paciente.apellido}" title="#{bundle.ViewCitaTitle_paciente}"/>
                     <h:outputText value="#{bundle.ViewCitaLabel_odontologo}"/>
@@ -58,7 +58,10 @@
                         </h:column>
                         
                 </h:dataTable>
-                
+
+
+                <br />
+                <h:commandLink action="../factura/View.xhtml" value="Ver Factura"/>
                 <br />
                 <h:commandLink action="#{citaController.destroyAndView}" value="#{bundle.ViewCitaDestroyLink}"/>
                 <br />

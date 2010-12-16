@@ -15,8 +15,7 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditFacturaLabel_codigo}" for="codigo" />
-                    <h:inputText id="codigo" value="#{facturaController.selected.codigo}" title="#{bundle.EditFacturaTitle_codigo}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_codigo}"/>
+                    
                     <h:outputLabel value="#{bundle.EditFacturaLabel_estado}" for="estado" />
                     <h:inputText id="estado" value="#{facturaController.selected.estado}" title="#{bundle.EditFacturaTitle_estado}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_estado}"/>
                     <h:outputLabel value="#{bundle.EditFacturaLabel_total}" for="total" />
@@ -29,7 +28,7 @@
                 <h:commandLink action="#{facturaController.update}" value="#{bundle.EditFacturaSaveLink}"/>
                 <br />
                 <br />
-                <h:commandLink action="View" value="#{bundle.EditFacturaViewLink}" immediate="true"/>
+                <h:commandLink action="View" value="#{bundle.EditFacturaViewLink}" immediate="true"  />
                 <br />
                 <h:commandLink action="#{facturaController.prepareList}" value="#{bundle.EditFacturaShowAllLink}" immediate="true"/>
                 <br />

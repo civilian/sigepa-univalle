@@ -17,23 +17,26 @@
                 <h:panelGrid columns="2">                                        
 
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_cedula}" for="cedula" />
-                    <h:inputText id="cedula" value="#{auxiliarController.selected.usuario.cedula}" title="#{bundle.EditUsuarioTitle_cedula}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_cedula}"/>
+                    <h:inputText id="cedula" value="#{auxiliarController.entity_usuario.cedula}" title="#{bundle.EditUsuarioTitle_cedula}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_cedula}"/>
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_nombre}" for="nombre" />
-                    <h:inputText id="nombre" value="#{auxiliarController.selected.usuario.nombre}" title="#{bundle.EditUsuarioTitle_nombre}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_nombre}"/>
+                    <h:inputText id="nombre" value="#{auxiliarController.entity_usuario.nombre}" title="#{bundle.EditUsuarioTitle_nombre}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_nombre}"/>
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_apellido}" for="apellido" />
-                    <h:inputText id="apellido" value="#{auxiliarController.selected.usuario.apellido}" title="#{bundle.EditUsuarioTitle_apellido}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_apellido}"/>
+                    <h:inputText id="apellido" value="#{auxiliarController.entity_usuario.apellido}" title="#{bundle.EditUsuarioTitle_apellido}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_apellido}"/>
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_sexo}" for="sexo" />
-                    <h:inputText id="sexo" value="#{auxiliarController.selected.usuario.sexo}" title="#{bundle.EditUsuarioTitle_sexo}" />
+                   <h:selectOneMenu id="sexo" value="#{auxiliarController.entity_usuario.sexo}" title="#{bundle.CreateUsuarioTitle_sexo}" >
+                        <f:selectItem  itemLabel="Femenino" itemValue='f'  />
+                        <f:selectItem itemLabel="Masculino" itemValue='m'  />
+                    </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_telefono}" for="telefono" />
-                    <h:inputText id="telefono" value="#{auxiliarController.selected.usuario.telefono}" title="#{bundle.EditUsuarioTitle_telefono}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_telefono}"/>
+                    <h:inputText id="telefono" value="#{auxiliarController.entity_usuario.telefono}" title="#{bundle.EditUsuarioTitle_telefono}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_telefono}"/>
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_direccion}" for="direccion" />
-                    <h:inputText id="direccion" value="#{auxiliarController.selected.usuario.direccion}" title="#{bundle.EditUsuarioTitle_direccion}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_direccion}"/>
+                    <h:inputText id="direccion" value="#{auxiliarController.entity_usuario.direccion}" title="#{bundle.EditUsuarioTitle_direccion}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_direccion}"/>
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_email}" for="email" />
-                    <h:inputText id="email" value="#{auxiliarController.selected.usuario.email}" title="#{bundle.EditUsuarioTitle_email}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_email}"/>
+                    <h:inputText id="email" value="#{auxiliarController.entity_usuario.email}" title="#{bundle.EditUsuarioTitle_email}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_email}"/>
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_login}" for="login" />
-                    <h:inputText id="login" value="#{auxiliarController.selected.usuario.login}" title="#{bundle.EditUsuarioTitle_login}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_login}"/>
+                    <h:inputText id="login" value="#{auxiliarController.entity_usuario.login}" title="#{bundle.EditUsuarioTitle_login}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_login}"/>
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_contrasena}" for="contrasena" />
-                    <h:inputText id="contrasena" value="#{auxiliarController.selected.usuario.contrasena}" title="#{bundle.EditUsuarioTitle_contrasena}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_contrasena}"/>
+                    <h:inputText id="contrasena" value="#{auxiliarController.entity_usuario.contrasena}" title="#{bundle.EditUsuarioTitle_contrasena}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_contrasena}"/>
 
                 </h:panelGrid>
                 <h:commandLink action="#{auxiliarController.update}" value="#{bundle.EditAuxiliarSaveLink}"/>

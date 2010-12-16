@@ -16,21 +16,26 @@
             <h:form>
                 <h:panelGrid columns="2">                   
                     <h:outputLabel value="#{bundle.CreateCitaLabel_fechaHora}" for="fechaHora" />
-                    <h:inputText id="fechaHora" value="#{citaController.selected.fechaHora}" title="#{bundle.CreateCitaTitle_fechaHora}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    <h:inputText id="fechaHora" value="#{citaController.selected.fechaHora}" title="#{bundle.CreateCitaTitle_fechaHora}" required="true" requiredMessage="El campo fecha es obligatorio">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:inputText>
                     <h:outputLabel value="#{bundle.CreateCitaLabel_estado}" for="estado" />
-                    <h:inputText id="estado" value="#{citaController.selected.estado}" title="#{bundle.CreateCitaTitle_estado}" />
+
+                    <h:selectOneMenu id="estado" value="#{citaController.selected.estado}" title="#{bundle.CreateCitaTitle_estado}" >
+                        <f:selectItem  itemLabel="Programada" itemValue="p" />
+                        <f:selectItem itemLabel="Cancelada" itemValue="c" />
+                        <f:selectItem  itemLabel="Realizada" itemValue="r" />
+                    </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateCitaLabel_paciente}" for="paciente" />
-                    <h:selectOneMenu id="paciente" value="#{citaController.selected.paciente}" title="#{bundle.CreateCitaTitle_paciente}" >
-                        <f:selectItems value="#{pacienteController.itemsAvailableSelectOne}"/>
+                    <h:selectOneMenu id="paciente" value="#{citaController.selected.paciente}" title="#{bundle.CreateCitaTitle_paciente}"  required="true" requiredMessage="El campo paciente es obligatorio" >
+                        <f:selectItems value="#{pacienteController.itemsAvailableSelectOne}" />
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateCitaLabel_odontologo}" for="odontologo" />
-                    <h:selectOneMenu id="odontologo" value="#{citaController.selected.odontologo}" title="#{bundle.CreateCitaTitle_odontologo}" >
-                        <f:selectItems value="#{odontologoController.itemsAvailableSelectOne}"/>
+                    <h:selectOneMenu id="odontologo" value="#{citaController.selected.odontologo}" title="#{bundle.CreateCitaTitle_odontologo}" required="true" requiredMessage="El campo odontologo es obligatorio">
+                        <f:selectItems value="#{odontologoController.itemsAvailableSelectOne}" />
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateCitaProcedimientoLabel_procedimiento}" for="procedimiento" />
-                    <h:selectOneMenu id="procedimiento" value="#{citaController.entity_citaProcedimiento.procedimiento}" title="#{bundle.CreateCitaProcedimientoTitle_procedimiento}" >
+                    <h:selectOneMenu id="procedimiento" value="#{citaController.entity_citaProcedimiento.procedimiento}" title="#{bundle.CreateCitaProcedimientoTitle_procedimiento}"  required="true" requiredMessage="El campo procedimiento es obligatorio" >
                         <f:selectItems value="#{procedimientoController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
 <!--                     <h:outputLabel value="#{bundle.CreateCitaAsignadaPorLabel_auxiliar}" for="auxiliar" />
@@ -40,7 +45,7 @@
                     
                     </h:panelGrid>
                      <h:outputLabel value="#{bundle.CreateCitaProcedimientoLabel_observaciones}" for="observaciones" />                     
-                     <h:inputTextarea id="observaciones" value="#{citaController.entity_citaProcedimiento.observaciones}" title="#{bundle.CreateCitaProcedimientoTitle_observaciones}" required="true" requiredMessage="#{bundle.CreateCitaProcedimientoRequiredMessage_observaciones}"/>
+                     <h:inputTextarea id="observaciones" value="#{citaController.entity_citaProcedimiento.observaciones}" title="#{bundle.CreateCitaProcedimientoTitle_observaciones}"  requiredMessage="#{bundle.CreateCitaProcedimientoRequiredMessage_observaciones}"/>
 
                     
 

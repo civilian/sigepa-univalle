@@ -14,13 +14,28 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateAuxiliarLabel_codauxiliar}" for="codauxiliar" />
-                    <h:inputText id="codauxiliar" value="#{auxiliarController.selected.codauxiliar}" title="#{bundle.CreateAuxiliarTitle_codauxiliar}" required="true" requiredMessage="#{bundle.CreateAuxiliarRequiredMessage_codauxiliar}"/>
-                    <h:outputLabel value="#{bundle.CreateAuxiliarLabel_usuario}" for="usuario" />
-                    <h:selectOneMenu id="usuario" value="#{auxiliarController.selected.usuario}" title="#{bundle.CreateAuxiliarTitle_usuario}" required="true" requiredMessage="#{bundle.CreateAuxiliarRequiredMessage_usuario}">
-                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                <h:panelGrid columns="2">                    
+                   <h:outputLabel value="#{bundle.CreateUsuarioLabel_cedula}" for="cedula" />
+                   <h:inputText id="cedula" value="#{auxiliarController.entity_usuario.cedula}" title="#{bundle.CreateUsuarioTitle_cedula}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_cedula}"/>
+                    <h:outputLabel value="#{bundle.CreateUsuarioLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{auxiliarController.entity_usuario.nombre}" title="#{bundle.CreateUsuarioTitle_nombre}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_nombre}"/>
+                    <h:outputLabel value="#{bundle.CreateUsuarioLabel_apellido}" for="apellido" />
+                    <h:inputText id="apellido" value="#{auxiliarController.entity_usuario.apellido}" title="#{bundle.CreateUsuarioTitle_apellido}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_apellido}"/>
+                    <h:outputLabel value="#{bundle.CreateUsuarioLabel_sexo}" for="sexo" />
+                    <h:selectOneMenu id="sexo" value="#{auxiliarController.entity_usuario.sexo}" title="#{bundle.CreateUsuarioTitle_sexo}" >
+                        <f:selectItem  itemLabel="Femenino" itemValue='f'  />
+                        <f:selectItem itemLabel="Masculino" itemValue='m'  />
                     </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateUsuarioLabel_telefono}" for="telefono" />
+                    <h:inputText id="telefono" value="#{auxiliarController.entity_usuario.telefono}" title="#{bundle.CreateUsuarioTitle_telefono}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_telefono}"/>
+                    <h:outputLabel value="#{bundle.CreateUsuarioLabel_direccion}" for="direccion" />
+                    <h:inputText id="direccion" value="#{auxiliarController.entity_usuario.direccion}" title="#{bundle.CreateUsuarioTitle_direccion}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_direccion}"/>
+                    <h:outputLabel value="#{bundle.CreateUsuarioLabel_email}" for="email" />
+                    <h:inputText id="email" value="#{auxiliarController.entity_usuario.email}" title="#{bundle.CreateUsuarioTitle_email}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_email}"/>
+                    <h:outputLabel value="#{bundle.CreateUsuarioLabel_login}" for="login" />
+                    <h:inputText id="login" value="#{auxiliarController.entity_usuario.login}" title="#{bundle.CreateUsuarioTitle_login}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_login}"/>
+                    <h:outputLabel value="#{bundle.CreateUsuarioLabel_contrasena}" for="contrasena" />
+                    <h:inputText id="contrasena" value="#{auxiliarController.entity_usuario.contrasena}" title="#{bundle.CreateUsuarioTitle_contrasena}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_contrasena}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{auxiliarController.create}" value="#{bundle.CreateAuxiliarSaveLink}" />

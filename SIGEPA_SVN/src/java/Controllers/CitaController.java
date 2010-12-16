@@ -7,6 +7,7 @@ import Entities.Auxiliar;
 import Entities.CitaAsignadaPor;
 import Entities.CitaProcedimiento;
 import Facades.CitaFacade;
+import java.util.Date;
 import java.util.List;
 
 import java.util.ResourceBundle;
@@ -35,10 +36,9 @@ public class CitaController {
     private int selectedItemIndex;
     private CitaAsignadaPor entity_cita_asignada_por=new CitaAsignadaPor();
     private CitaProcedimiento entity_citaProcedimiento=new CitaProcedimiento();
-    //private String observaciones;
 
-    ///talvez se pueda borrar
-    //private Auxiliar auxiliar;
+    private String estadoCita="";
+
 
     public CitaController() {
 
@@ -70,24 +70,30 @@ public class CitaController {
     public void setItemsProc(DataModel itemsProc) {
         this.itemsProc = itemsProc;
     }
-/*
-    public Auxiliar getAuxiliar() {
-        return auxiliar;
+
+
+
+    public String getEstadoCita() {
+
+
+
+        if((current.getEstado()).equals('c'))
+        {
+            estadoCita="Cancelada";
+        }
+        else if(current.getEstado().equals('r'))
+        {
+            estadoCita="Realizada";
+        }
+        else if(current.getEstado().equals('p'))
+        {
+            estadoCita="Programada";
+        }
+
+        return estadoCita;
     }
 
-    public void setAuxiliar(Auxiliar auxiliar) {
-        this.auxiliar = auxiliar;
-    }*/
 
-   /* public String getObservaciones() {
-        return observaciones;
-    }
-
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
-    }*/
-
-    
 
     public Cita getSelected() {
         if (current == null) {
@@ -126,6 +132,7 @@ public class CitaController {
 
     public String prepareView() {
         current = (Cita)getItems().getRowData();
+        getEstadoCita();
         entity_cita_asignada_por=facade_citaAsignadaPor.findByCita(current);
 
         itemsProc=new ListDataModel(facade_citaProcedimiento.findProcByCita(current));
@@ -137,12 +144,22 @@ public class CitaController {
 
     public String prepareCreate() {
         current = new Cita();
+        entity_cita_asignada_por=new CitaAsignadaPor();
+        entity_citaProcedimiento=new CitaProcedimiento();
         selectedItemIndex = -1;
         return "Create";
     }
 
     public String create() {
         try {
+
+            Date fechaActual=new Date();
+
+            if(!fechaActual.before(current.getFechaHora()))
+            {
+                JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CitaPasada"));
+                return null;
+            }
 
             getFacade().create(current);
                       
@@ -176,6 +193,14 @@ public class CitaController {
 
     public String update() {
         try {
+
+             Date fechaActual=new Date();
+
+            if(!fechaActual.before(current.getFechaHora()))
+            {
+                JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CitaPasada"));
+                return null;
+            }
             getFacade().edit(current);
             int index=0;
            for(int i=0; i<itemsProc.getRowCount() ; i++)
@@ -195,18 +220,18 @@ public class CitaController {
         }
     }
 
-    public void updateProc()
+    public String updateProc()
     {        
          try {
             facade_citaProcedimiento.edit((CitaProcedimiento)getItemsProc().getRowData());
             }
          catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return;
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));            
         }
+         return "View";
     }
 
-    public void destroyProc()
+    public String destroyProc()
     {
         try {
             entity_citaProcedimiento=(CitaProcedimiento)getItemsProc().getRowData();
@@ -215,12 +240,27 @@ public class CitaController {
          catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
-        return;
+        return "List";
     }
 
 
     public String destroy() {
+
         current = (Cita)getItems().getRowData();
+
+         entity_cita_asignada_por=facade_citaAsignadaPor.findByCita(current);
+         itemsProc=new ListDataModel(facade_citaProcedimiento.findProcByCita(current));
+         facade_citaAsignadaPor.remove(entity_cita_asignada_por);
+
+         for(int i=0; i<itemsProc.getRowCount() ; i++)
+           {
+               itemsProc.setRowIndex(i);
+               if(itemsProc.isRowAvailable())
+               {
+                 facade_citaProcedimiento.remove((CitaProcedimiento)getItemsProc().getRowData());
+               }
+           }
+        
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreateModel();
@@ -273,6 +313,7 @@ public class CitaController {
 
     private void recreateModel() {
         items = null;
+        itemsProc=null;
     }
 
     public String next() {
@@ -332,6 +373,9 @@ public class CitaController {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+CitaController.class.getName());
             }
         }
+
+
+
 
     }
 
