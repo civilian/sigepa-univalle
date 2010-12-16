@@ -1,28 +1,94 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>SIGEPA - Sistema de Gestion de Pacientes</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
+
     </h:head>
     <h:body>
+        <div id="izq" align="cabecera">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tbody><tr valign="top">
+                      <td rowspan="3" valign="top" width="10%"><img src="img/logo1.jpg" name="im4" width="329" height="148" alt=""></img></td>
+                      <td rowspan="2" align="left" background="img/comptile23183.gif" valign="top" width="3%" height="96"><img src="img/topcut23183.jpg" width="62" height="97" alt=""></img></td>
+                      <td align="left" background="img/comptile23183.jpg" valign="top" width="33%"><img src="img/comptile23183.jpg" width="13" height="67" alt=""></img></td>
+                      <td align="right" background="img/comptile23183.jpg" valign="top" width="31%" height="48"><img src="img/compname1.gif" name="im1" width="375" height="44" alt=""></img></td>
+                    </tr>
+                    <tr>
+                      <td align="left" background="img/slogantile23183.jpg" valign="top" width="33%" height="30"><img src="img/slogantile23183.jpg" width="13" height="30" alt=""></img></td>
+                      <td align="right" background="img/slogantile23183.jpg" valign="top" width="31%"><img src="img/slogan.gif" name="im2" width="375" height="30" alt=""></img></td>
+                    </tr>
+                    <tr>
+                      <td colspan="3" align="right" valign="top" height="52"><img src="img/email.gif" name="im3" border="0" width="350" height="21" alt=""></img></td>
+                    </tr>
+                  </tbody>
+             </table>
+        </div>
 
-        <h:form>
-            <h:panelGrid columns="7" >
-                <h:outputLabel value="#{bundle.SessionLabel_login}:" for="login" />
-                <h:inputText id="login" value="#{sesiones.usuario}" title="login" />
-                <h:outputLabel value="#{bundle.SessionLabel_password}:" for="password" />
-                <h:inputSecret id="password" value="#{sesiones.passwd}" title="passwd"/>
+        <div id="izq">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr><td><img src="img/botcut23183.gif" width="138" height="49" alt=""></img></td></tr>
+                </tbody>
+            </table>
+        </div>
 
-                <h:commandButton  action="#{sesiones.validar}" value="Entrar" />
-                <h:commandButton  action="#{sesiones.cerrarSession}" value="Salir" />
+        <div id="contenido" align="center">
+            <h1 align="center"> Bienvenido a SIGEPA </h1>
+            <h:form>
+                <h:panelGrid>
+                    <h:panelGroup id="datoslog">
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="#{bundle.SessionLabel_login}:" for="login" />
+                            <h:inputText id="login" value="#{sesiones.usuario}" title="login" />
+                            <h:outputLabel value="#{bundle.SessionLabel_password}:" for="password" />
+                            <h:inputSecret id="password" value="#{sesiones.passwd}" title="passwd"/>
+                            <h:commandButton  action="#{sesiones.validar}" value="Entrar" />
+                            <h:commandButton  action="#{sesiones.cerrarSession}" value="Salir" />
+                            <h:outputText value="Rol: #{sesiones.rol}" />
+                        </h:panelGrid>
+                    </h:panelGroup>
+                </h:panelGrid>
 
-                <h:outputText value="Rol: #{sesiones.rol}" />
+            </h:form>
+
+            <h:panelGrid rendered="#{sesiones.validado}">
+                <h:form>
+                    <h:commandLink action="/admin/auxiliar/List" value="Mostrar todos los Auxliares"/>
+                </h:form>
+                <h:form>
+                    <h:commandLink action="/admin/cita/List" value="Mostrar todas las Citas"/>
+                </h:form>
+                <h:form>
+                    <h:commandLink action="/admin/citaAsignadaPor/List" value="Mostrar todas las Citas por Asignacion"/>
+                </h:form>
+                <h:form>
+                    <h:commandLink action="/admin/citaProcedimiento/List" value="Mostrar todas las Citas-Procedimiento"/>
+                </h:form>
+                <h:form>
+                    <h:commandLink action="/admin/factura/List" value="Mostrar todas las Facturas"/>
+                </h:form>
+                <h:form>
+                    <h:commandLink action="/admin/historiaClinica/List" value="Mostrar todas las Historias Clinicas"/>
+                </h:form>
+                <h:form>
+                    <h:commandLink action="/admin/odontologo/List" value="Mostrar todos los Odontologos"/>
+                </h:form>
+                <h:form>
+                    <h:commandLink action="/admin/paciente/List" value="Mostrar todos los Pacientes"/>
+                </h:form>
+                <h:form>
+                    <h:commandLink action="/admin/procedimiento/List" value="Mostrar todos los Procedimientos"/>
+                </h:form>
+                <h:form>
+                    <h:commandLink action="/admin/usuario/List" value="Mostrar todos los Usuarios"/>
+                </h:form>
             </h:panelGrid>
-        </h:form>
-
-        <h1 align="center"> Bienvenido a SIGEPA </h1>
+        </div>
+        
         <h:panelGrid rendered="#{sesiones.validado}">
             <h:form>
                 <h:commandLink action="/admin/auxiliar/List" value="Mostrar todos los Auxliares"/>
@@ -58,6 +124,7 @@
                 <h:commandLink action="/admin/reportes/List" value="Reportes"/>
             </h:form>
         </h:panelGrid>
+        <div id="pie"></div>
     </h:body>
 </html>
 

@@ -33,25 +33,32 @@
     </h:head>
 
     <h:body>
-        <h:form>
-            <h:panelGrid columns="7" >
-                <h:outputLabel value="#{bundle.SessionLabel_login}:" for="login" />
-                <h:inputText id="login" value="#{sesiones.usuario}" title="login" />
-                <h:outputLabel value="#{bundle.SessionLabel_password}:" for="password" />
-                <h:inputSecret id="password" value="#{sesiones.passwd}" title="passwd"/>
-                
-                <h:commandButton  action="#{sesiones.validar}" value="Entrar" />
-                <h:commandButton  action="#{sesiones.cerrarSession}" value="Salir" />
+        <div id="izq" align="cabecera">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                      <th width="10%" rowspan="3" valign="top"><img src="img/logo1.jpg" width="329" height="148" name="im4" alt=""></img></th>
+                      <td rowspan="2" align="left" background="img/comptile23183.gif" height="96" valign="top" width="3%"><img src="img/topcut23183.jpg" width="62" height="97" alt=""></img></td>
+                      <td width="33%" align="left" background="img/comptile23183.jpg" valign="top"><img src="img/comptile23183.jpg" width="13" height="67" alt=""></img></td>
+                      <td width="31%" align="right" background="img/comptile23183.jpg" height="48" valign="top"><img src="img/compname1.gif" width="375" height="44" name="im1" alt=""></img></td>
+                    </tr>
+                </thead>
+                <tfoot>
+                     <tr>
+                      <td height="52" colspan="3" align="right" valign="top"><img src="img/email.gif" width="350" border="0" height="21" name="im3" alt=""></img></td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr>
+                      <td width="33%" align="left" background="img/slogantile23183.jpg" height="30" valign="top"><img src="img/slogantile23183.jpg" width="13" height="30" alt=""></img></td>
+                      <td width="31%" align="right" background="img/slogantile23183.jpg" valign="top"><img src="img/slogan1.gif" width="375" height="30" name="im2" alt=""></img></td>
+                    </tr>
+                </tbody>
+            </table>
 
-                <h:outputText value="Rol: #{sesiones.rol}" />
-            </h:panelGrid>
-        </h:form>
-        <h1>
-            <ui:insert name="title" >Default Title</ui:insert>
-        </h1>
-        <p>
-            <ui:insert name="body">Default Body</ui:insert>
-        </p>
+        </div>
+        <div id="contenido" align="center"></div>
+        <div id="pie"></div>
     </h:body>
 
 </html>
