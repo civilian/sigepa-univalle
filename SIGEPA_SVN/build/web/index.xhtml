@@ -24,16 +24,45 @@
                     <tr>
                       <td colspan="3" align="right" valign="top" height="52"><img src="img/email.gif" name="im3" border="0" width="350" height="21" alt=""></img></td>
                     </tr>
+                  <!--<tr><td><img src="img/botcut23183.gif" width="138" height="49" alt=""></img></td></tr>-->
                   </tbody>
              </table>
-        </div>
+            <h:panelGrid rendered="#{sesiones.validado}">
+                <h:form>
+                    <h:commandButton action="/admin/auxiliar/List" image="/img/aux1.gif"/>
 
-        <div id="izq">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tbody>
-                  <tr><td><img src="img/botcut23183.gif" width="138" height="49" alt=""></img></td></tr>
-                </tbody>
-            </table>
+                </h:form>
+                <h:form>
+                    <h:commandButton action="/admin/cita/List" image="/img/citas1.gif"/>
+                </h:form>
+                <h:form>
+                    <h:commandButton action="/admin/citaAsignadaPor/List" image="/img/citaAsig1.gif"/>
+                </h:form>
+                <h:form>
+                    <h:commandButton action="/admin/citaProcedimiento/List" image="/img/citaPro1.gif"/>
+                </h:form>
+                <h:form>
+                    <h:commandButton action="/admin/factura/List" image="/img/fact1.gif"/>
+                </h:form>
+                <h:form>
+                    <h:commandButton action="/admin/historiaClinica/List" image="/img/hist.gif"/>
+                </h:form>
+                <h:form>
+                    <h:commandButton action="/admin/odontologo/List" image="/img/odontos1.gif"/>
+                </h:form>
+                <h:form>
+                    <h:commandButton action="/admin/paciente/List" image="/img/pacientes1.gif"/>
+                </h:form>
+                <h:form>
+                    <h:commandButton action="/admin/procedimiento/List" image="/img/proc1.gif"/>
+                </h:form>
+                <h:form>
+                    <h:commandButton action="/admin/usuario/List" image="/img/usuarios1.gif"/>
+                </h:form>
+               <h:form>
+                    <h:commandButton action="/admin/reportes/List" image="/img/reportes1.gif"/>
+                </h:form>
+            </h:panelGrid>
         </div>
 
         <div id="contenido" align="center">
@@ -46,82 +75,18 @@
                             <h:inputText id="login" value="#{sesiones.usuario}" title="login" />
                             <h:outputLabel value="#{bundle.SessionLabel_password}:" for="password" />
                             <h:inputSecret id="password" value="#{sesiones.passwd}" title="passwd"/>
-                            <h:commandButton  action="#{sesiones.validar}" value="Entrar" />
-                            <h:commandButton  action="#{sesiones.cerrarSession}" value="Salir" />
+                            <h:commandButton  action="#{sesiones.validar}" value="Entrar"/>
+                            <h:commandButton  action="#{sesiones.cerrarSession}" image="/img/Salir1.gif"/>
                             <h:outputText value="Rol: #{sesiones.rol}" />
                         </h:panelGrid>
                     </h:panelGroup>
                 </h:panelGrid>
 
             </h:form>
+            </div>
 
-            <h:panelGrid rendered="#{sesiones.validado}">
-                <h:form>
-                    <h:commandLink action="/admin/auxiliar/List" value="Mostrar todos los Auxliares"/>
-                </h:form>
-                <h:form>
-                    <h:commandLink action="/admin/cita/List" value="Mostrar todas las Citas"/>
-                </h:form>
-                <h:form>
-                    <h:commandLink action="/admin/citaAsignadaPor/List" value="Mostrar todas las Citas por Asignacion"/>
-                </h:form>
-                <h:form>
-                    <h:commandLink action="/admin/citaProcedimiento/List" value="Mostrar todas las Citas-Procedimiento"/>
-                </h:form>
-                <h:form>
-                    <h:commandLink action="/admin/factura/List" value="Mostrar todas las Facturas"/>
-                </h:form>
-                <h:form>
-                    <h:commandLink action="/admin/historiaClinica/List" value="Mostrar todas las Historias Clinicas"/>
-                </h:form>
-                <h:form>
-                    <h:commandLink action="/admin/odontologo/List" value="Mostrar todos los Odontologos"/>
-                </h:form>
-                <h:form>
-                    <h:commandLink action="/admin/paciente/List" value="Mostrar todos los Pacientes"/>
-                </h:form>
-                <h:form>
-                    <h:commandLink action="/admin/procedimiento/List" value="Mostrar todos los Procedimientos"/>
-                </h:form>
-                <h:form>
-                    <h:commandLink action="/admin/usuario/List" value="Mostrar todos los Usuarios"/>
-                </h:form>
-                <h:form>
-                <h:commandLink action="/admin/auxiliar/List" value="Mostrar todos los Auxliares"/>
-
-                </h:form>
-                <h:form>
-                    <h:commandLink action="/admin/cita/List" value="Mostrar todas las Citas"/>
-                </h:form>
-                <h:form>
-                    <h:commandLink action="/admin/citaAsignadaPor/List" value="Mostrar todas las Citas por Asignacion"/>
-                </h:form>
-                <h:form>
-                    <h:commandLink action="/admin/citaProcedimiento/List" value="Mostrar todas las Citas-Procedimiento"/>
-                </h:form>
-                <h:form>
-                    <h:commandLink action="/admin/factura/List" value="Mostrar todas las Facturas"/>
-                </h:form>
-                <h:form>
-                    <h:commandLink action="/admin/historiaClinica/List" value="Mostrar todas las Historias Clinicas"/>
-                </h:form>
-                <h:form>
-                    <h:commandLink action="/admin/odontologo/List" value="Mostrar todos los Odontologos"/>
-                </h:form>
-                <h:form>
-                    <h:commandLink action="/admin/paciente/List" value="Mostrar todos los Pacientes"/>
-                </h:form>
-                <h:form>
-                    <h:commandLink action="/admin/procedimiento/List" value="Mostrar todos los Procedimientos"/>
-                </h:form>
-                <h:form>
-                    <h:commandLink action="/admin/usuario/List" value="Mostrar todos los Usuarios"/>
-                </h:form>
-                <h:form>
-                    <h:commandLink action="/admin/reportes/List" value="Reportes"/>
-                </h:form>
-            </h:panelGrid>
-        </div>           
+        <div id="izq">
+        </div>
         <div id="pie"></div>
     </h:body>
 </html>
