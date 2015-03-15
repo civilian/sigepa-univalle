@@ -1,0 +1,1 @@
+Este sistema esta siendo desarrollado para la asignatura de Desarrollo de Software II. El objetivo es aprender acerca de las tecnologias JSF2 entre otros.
